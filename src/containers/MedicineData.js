@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function MedicineData() {
 
-  const MediData = [
+    const MediData = [
         {
             id: 101,
             name: 'Abacavir',
@@ -56,22 +56,27 @@ export default function MedicineData() {
         }
     ]
 
+    // Map All Medicine Data
+
     MediData.map((d) => {
         console.log(d.id + "\n" + d.name + "\n" + d.quantity + "\n" + d.price + "\n" + d.expiry + "\n");
     })
 
-    let medi_Filter = MediData.filter((a)=> a.expiry > 2021 && a.price > 200);
+    // filter Medicine Data
+
+    let medi_Filter = MediData.filter((a) => a.expiry > 2021 && a.price > 200);
 
     console.log("---------------- Medicine Filter Data ---------------------" + "\n");
     console.log(medi_Filter);
 
-    let total_price = medi_Filter.reduce((acc,b ,index) => acc+b.price, 0)
+    // Reduce Data 
 
+    let total_price = medi_Filter.reduce((acc, b, index) => acc + b.price, 0)
     console.log(total_price);
 
-  return (
-    <View>
-      <Text>MedicineData</Text>
-    </View>
-  )
+    return (
+        <View>
+            <Text>MedicineData</Text>
+        </View>
+    )
 }
