@@ -19,6 +19,10 @@ const styles = StyleSheet.create ({
   },
   title:{
     marginTop: 50,
-    color: 'red'
+    color: 'red',
+    fontSize: 30,
+    textDecorationLine: 'underline',
+    textDecorationColor: 'blue',
+    
   },
 })
