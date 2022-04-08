@@ -5,7 +5,7 @@ import First from './src/containers/First'
 export default function App() {
   return (
     <View>
-      <Text>App</Text>
+      
       <First />
     </View>
   )
