@@ -45,21 +45,17 @@ export default function MedicineData() {
     },
   ];
 
-  // Map All Medicine Data
 
+  // Map All Medicine Data
   MediData.map(d => {
-    console.log(
-      d.id +
-        '\n' +
-        d.name +
-        '\n' +
-        d.quantity +
-        '\n' +
-        d.price +
-        '\n' +
-        d.expiry +
-        '\n',
-    );
+
+      console.log("Id : " + d.id);
+      console.log("Name : " + d.name);
+      console.log("Quality : " + d.quantity);
+      console.log("Price : " + d.price);
+      console.log("Expiry : " + d.expiry);
+      
+
     if (d == 'content') {
       content.forEach(element => {
         console.log(element);
@@ -68,22 +64,19 @@ export default function MedicineData() {
   });
 
   // filter Medicine Data
-
   let medi_Filter = MediData.filter(a => a.expiry > 2021 && a.price > 200);
-
-  console.log(
-    '---------------- Medicine Filter Data ---------------------' + '\n',
-  );
+  console.log('---------- Medicine Filter Data -----------' + '\n');
   console.log(medi_Filter);
+ 
+
 
   // Reduce Data
-
   let total_price = medi_Filter.reduce((acc, b, index) => acc + b.price, 0);
   console.log('Total Price = ' + total_price);
 
   return (
     <View>
-      <Text style={{color: 'blue', fontSize: 30}}>{total_price}</Text>
+      <Text style={{color: 'blue', fontSize: 30}}>{}</Text>
     </View>
   );
 }
