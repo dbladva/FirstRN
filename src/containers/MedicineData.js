@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 
 export default function MedicineData() {
@@ -75,8 +75,10 @@ export default function MedicineData() {
     console.log(total_price);
 
     return (
-        <View>
-            <Text>MedicineData</Text>
-        </View>
+        <SafeAreaView>
+            <View style={{alignSelf: 'center'}}>
+                <Text style={{fontSize: 25, fontWeight: '600'}}>MedicineData</Text>
+            </View>
+        </SafeAreaView>
     )
 }

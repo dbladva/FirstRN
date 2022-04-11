@@ -71,10 +71,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop: 50,
+    marginTop: 10,
     color: 'red',
     fontSize: 30,
-    textDecorationLine: 'underline',
     textDecorationColor: 'blue',
 
   },
