@@ -4,15 +4,17 @@ import First from './src/containers/First'
 import Demo from './src/containers/Demo'
 import MedicineData from './src/containers/MedicineData'
 import Counter from './src/containers/Counter'
+import Destructuringg from './src/containers/Destructuringg'
+
 
 export default function App() {
   return (
-    <View>
-      
+    <View style={{marginBottom: 20,}}>
       <MedicineData />
       <First />
       <Demo />
-      <Counter />
+      <Destructuringg />
+      {/* <Counter /> */}
     </View>
   )
 }

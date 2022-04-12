@@ -77,7 +77,7 @@ export default function MedicineData() {
     return (
         <SafeAreaView>
             <View style={{alignSelf: 'center'}}>
-                <Text style={{fontSize: 25, fontWeight: '600'}}>MedicineData</Text>
+                <Text style={{fontSize: 25, fontWeight: '600'}}>.......</Text>
             </View>
         </SafeAreaView>
     )
