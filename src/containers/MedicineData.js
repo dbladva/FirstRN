@@ -59,14 +59,27 @@ export default function MedicineData() {
     // Map All Medicine Data
 
     MediData.map((d) => {
-        console.log(d.id + "\n" + d.name + "\n" + d.quantity + "\n" + d.price + "\n" + d.expiry + "\n");
+
+        console.log("ID  :" + d.id);
+        console.log("Name  :" + d.name);
+        console.log("Quantity :" + d.quantity);
+        console.log("Prize :" + d.price);
+        console.log("Expiry :" + d.expiry);
+        console.log("\n");
+
+        if (d == "content") {
+            content.map((a) => {
+                log("Content :" + a);
+            }) 
+        }
+
     })
 
     // filter Medicine Data
 
     let medi_Filter = MediData.filter((a) => a.expiry > 2021 && a.price > 200);
 
-    console.log("---------------- Medicine Filter Data ---------------------" + "\n");
+    console.log("----------- Medicine Filter Data ---------------" + "\n");
     console.log(medi_Filter);
 
     // Reduce Data 

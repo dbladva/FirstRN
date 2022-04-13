@@ -8,7 +8,6 @@ import Counter from './src/containers/Counter'
 export default function App() {
   return (
     <View>
-      
       <MedicineData />
       <First />
       <Demo />
