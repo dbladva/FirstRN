@@ -4,14 +4,17 @@ import First from './src/containers/First'
 import Demo from './src/containers/Demo'
 import MedicineData from './src/containers/MedicineData'
 import Counter from './src/containers/Counter'
+import Destructure from './src/containers/Destructure'
+import ClassState from './src/containers/ClassState'
+import FunState from './src/containers/FunState'
+import Medi_State_class from './src/containers/Medi_State_class'
+import Medi_State_Fun from './src/containers/Medi_State_Fun'
 
 export default function App() {
   return (
-    <View>
-      <MedicineData />
-      <First />
-      <Demo />
-      <Counter />
+    <View style={{marginTop: 50,alignItems: 'center'}}>
+      
+      <Medi_State_Fun />  
     </View>
   )
 }

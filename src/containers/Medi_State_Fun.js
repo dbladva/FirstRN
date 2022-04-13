@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView } from 'react-native'
-import React from 'react'
+import { View, Text, Button } from 'react-native'
+import React, { useState } from 'react'
 
-export default function MedicineData() {
+export default function Medi_State_Fun() {
 
     const MediData = [
         {
@@ -56,42 +56,24 @@ export default function MedicineData() {
         }
     ]
 
-    // Map All Medicine Data
 
-    MediData.map((d) => {
+    const [id, setId] = useState("MediCine Name");
 
-        console.log("ID  :" + d.id);
-        console.log("Name  :" + d.name);
-        console.log("Quantity :" + d.quantity);
-        console.log("Prize :" + d.price);
-        console.log("Expiry :" + d.expiry);
-        console.log("\n");
-
-        if (d == "content") {   
-            content.map((a) => {
-                log("Content :" + a);
-            }) 
-        }
-
-    })
-
-    // filter Medicine Data
-
-    let medi_Filter = MediData.filter((a) => a.expiry > 2021 && a.price > 200);
-
-    console.log("----------- Medicine Filter Data ---------------" + "\n");
-    console.log(medi_Filter);
-
-    // Reduce Data 
-
-    let total_price = medi_Filter.reduce((acc, b, index) => acc + b.price, 0)
-    console.log(total_price);
+    onPressLearnMore = () => {
+        MediData.map((a) => {
+            setId(a.name);
+        })
+    }
 
     return (
-        <SafeAreaView>
-            <View style={{alignSelf: 'center'}}>
-                <Text>{total_price}</Text>
-            </View>
-        </SafeAreaView>
+
+        <View>
+            <Text>{id}</Text>
+            <Button
+                onPress={onPressLearnMore}
+                title="Learn More"
+                color="#841584"
+            />
+        </View>
     )
 }
