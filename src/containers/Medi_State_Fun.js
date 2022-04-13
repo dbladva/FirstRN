@@ -57,18 +57,18 @@ export default function Medi_State_Fun() {
     ]
 
 
-    const [id, setId] = useState("MediCine Name");
+    const [Name, setName] = useState("MediCine Name");
 
     onPressLearnMore = () => {
         MediData.map((a) => {
-            setId(a.name);
+            setName(a.name);
         })
     }
 
     return (
 
         <View>
-            <Text>{id}</Text>
+            <Text>{Name}</Text>
             <Button
                 onPress={onPressLearnMore}
                 title="Learn More"
