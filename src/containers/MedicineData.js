@@ -90,7 +90,11 @@ export default function MedicineData() {
     return (
         <SafeAreaView>
             <View style={{alignSelf: 'center'}}>
+<<<<<<< HEAD
                 <Text>{total_price}</Text>
+=======
+                <Text style={{fontSize: 25, fontWeight: '600'}}>.......</Text>
+>>>>>>> 94ee2e5da47e7c699463530305037bfe52f9c5ef
             </View>
         </SafeAreaView>
     )

@@ -53,10 +53,7 @@ export default function First() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>First App</Text>
-      <Button
-        // onPress={}
-        title="Press Me"
-      />
+     
     </View>
   );
 }
