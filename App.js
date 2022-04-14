@@ -13,7 +13,6 @@ import Medi_State_Fun from './src/containers/Medi_State_Fun'
 export default function App() {
   return (
     <View style={{marginTop: 50,alignItems: 'center'}}>
-      
       <Medi_State_Fun />  
     </View>
   )
