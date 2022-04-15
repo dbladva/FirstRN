@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
+import MedicineProps from './MedicineProps'
 
-export default function MedicineData() {
+export default function MediineData(props) {
 
     const MediData = [
         {
@@ -56,42 +57,15 @@ export default function MedicineData() {
         }
     ]
 
-    // Map All Medicine Data
-
-    MediData.map((d) => {
-
-        console.log("ID  :" + d.id);
-        console.log("Name  :" + d.name);
-        console.log("Quantity :" + d.quantity);
-        console.log("Prize :" + d.price);
-        console.log("Expiry :" + d.expiry);
-        console.log("\n");
-
-        if (d == "content") {   
-            content.map((a) => {
-                log("Content :" + a);
-            }) 
-        }
-
+    MediData.map((Data,index) => {
+        let Darr = [];
+        Darr = Data.name;
     })
+    id="101"
 
-    // filter Medicine Data
-
-    let medi_Filter = MediData.filter((a) => a.expiry > 2021 && a.price > 200);
-
-    console.log("----------- Medicine Filter Data ---------------" + "\n");
-    console.log(medi_Filter);
-
-    // Reduce Data 
-
-    let total_price = medi_Filter.reduce((acc, b, index) => acc + b.price, 0)
-    console.log(total_price);
-
-    return (
-        <SafeAreaView>
-            <View style={{alignSelf: 'center'}}>
-                <Text>{total_price}</Text>
-            </View>
-        </SafeAreaView>
-    )
+  return (
+    <View>  
+      <MedicineProps />
+    </View>
+  )
 }

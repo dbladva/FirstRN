@@ -56,24 +56,35 @@ export default function Medi_State_Fun() {
         }
     ]
 
+    const [sname, setsName] = useState(MediData);
 
-    const [id, setId] = useState("MediCine Name");
-
-    onPressLearnMore = () => {
-        MediData.map((a) => {
-            setId(a.name);
-        })
+    const newData = () => {
+        setsName('Hello')
     }
+
 
     return (
 
+
         <View>
-            <Text>{id}</Text>
-            <Button
-                onPress={onPressLearnMore}
-                title="Learn More"
-                color="#841584"
-            />
+            {
+                MediData.map((Data, index) => {
+                    const {id, name} = Data;
+                    
+                    return (
+                        <View>
+                            <Text>{id} {name}</Text>
+                            <Button
+                                onPress={newData}
+                                title="Click Me"
+                                color="#841584"
+                            />
+                        </View>
+                    )
+                })
+            }
+
         </View>
+
     )
 }
