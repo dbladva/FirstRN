@@ -14,7 +14,11 @@ import MediineData from './src/containers/MediineData'
 export default function App() {
   return (
     <View style={{marginTop: 50,alignItems: 'center'}}>
+<<<<<<< HEAD
      <Medi_State_Fun />
+=======
+      <Medi_State_Fun />  
+>>>>>>> 1162c51f68425f54fffede9941b83c8ff871e3c1
     </View>
   )
 }
