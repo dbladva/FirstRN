@@ -11,13 +11,14 @@ import Medi_State_class from './src/containers/Medi_State_class'
 import Medi_State_Fun from './src/containers/Medi_State_Fun'
 import MediineData from './src/containers/MediineData'
 import Watch2 from './src/containers/Watch2'
+import Calculator from './src/containers/Calculator'
 
 
 
 export default function App() {
   return (
-    <View style={{marginTop: 50,alignItems: 'center'}}>
-      <Watch2 />
+    <View style={{flex: 1,}}>
+      <Calculator />
     </View>
 
   )
