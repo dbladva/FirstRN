@@ -94,8 +94,7 @@ export default function Props_Medi_Demo(props) {
           </View>
         );
       })}
-      {/* <Props_Medi_Data id="100" /> */}
-      <Props_Medi_Data/>
+      <Props_Medi_Data />
     </View>
   );
 }

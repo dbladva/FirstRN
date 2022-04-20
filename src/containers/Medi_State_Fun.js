@@ -61,11 +61,6 @@ export default function Medi_State_Fun() {
                 margin: 20,
                 borderRadius: 10,
             }}>
-            {MedicineData.map(a => {
-                const { id, name } = a;
-
-                const [fname, setName] = useState(name);
-
 
         <View>
             {
@@ -84,8 +79,7 @@ export default function Medi_State_Fun() {
                     )
                 })
             }
-
+</View>
         </View>
-
     )
 }
