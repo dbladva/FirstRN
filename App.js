@@ -12,13 +12,15 @@ import Medi_State_Fun from './src/containers/Medi_State_Fun'
 import MediineData from './src/containers/MediineData'
 import Watch2 from './src/containers/Watch2'
 import Calculator from './src/containers/Calculator'
+import GSTcalculator from './src/containers/GSTCalculator'
 
 
 
 export default function App() {
   return (
     <View style={{flex: 1,}}>
-      <Calculator />
+      {/* <Calculator /> */}
+      <GSTcalculator />
     </View>
 
   )
