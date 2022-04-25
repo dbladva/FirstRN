@@ -33,12 +33,21 @@ import {
       gst = eval(parseInt(IniAmount) + parseFloat(GStAmount));
       gst = gst.toFixed(2);
       setTotalAmount(gst);
+
+      // CGST 
+      let cgstRate = eval(GSTrate / 2);
+
+      setCGST(eval(cgstRate * eqution) / 100)
+      setSGST(eval(cgstRate * eqution) / 100)
+
     };
+
     const ClearAllData = () => {
       setIniAmount(0);
       setGSTrate(0);
       setTotalAmount(0);
       setCGST(0);
+      setSGST(0)
     };
   
     return (
@@ -60,11 +69,11 @@ import {
                 }}
                 // value={Amount}
                 placeholder="Enter Amount"
-                keyboardType="number-pad"
+                keyboardType="numbers-and-punctuation"
               />
             </View>
           </View>
-          {/* {
+          {/* 
             (EnterValue = () => {
               console.log('Enter Amount');
               return (
@@ -89,7 +98,7 @@ import {
                 }}
                 // value={number}
                 placeholder="Enter GST(%)"
-                keyboardType="number-pad"
+                keyboardType="numbers-and-punctuation"
               />
             </View>
           </View>
@@ -132,7 +141,7 @@ import {
               <Text style={{ fontSize: 20 }}>CGST :</Text>
             </View>
             <View style={{ width: '50%' }}>
-              <Text style={style.resultText}>0</Text>
+              <Text style={style.resultText}>{CGST}</Text>
             </View>
           </View>
           <View style={style.netAmount}>
@@ -140,7 +149,7 @@ import {
               <Text style={{ fontSize: 20 }}>SGST :</Text>
             </View>
             <View style={{ width: '50%' }}>
-              <Text style={style.resultText}>0</Text>
+              <Text style={style.resultText}>{SGST}</Text>
             </View>
           </View>
         </View>
@@ -159,7 +168,7 @@ import {
     container: {
       flex: 1,
       padding: 30,
-      backgroundColor: 'black',
+      backgroundColor: 'white',
     },
     InputValueView: {
       flex: 2.3,
@@ -189,6 +198,7 @@ import {
     MainTitle: {
       fontSize: 30,
       color: 'white',
+      // color: 'black',
       fontWeight: 'bold',
       padding: 1,
       backgroundColor: 'rgba(123, 247, 212, 0.59)',
@@ -222,7 +232,7 @@ import {
       textShadowOffset: { width: 4, height: 4 },
       textShadowRadius: 6,
       borderWidth: 0.5,
-      borderColor: 'white',
+      borderColor: 'black',
     },
     resultText: {
       borderBottomWidth: 0.7,
