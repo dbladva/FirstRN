@@ -216,6 +216,7 @@ import {
       borderWidth: 1,
       borderColor: 'rgba(245, 212, 163, 1)',
       borderRadius: 10,
+      padding: 10,
     },
     calculateBtn: {
       margin: 10,
