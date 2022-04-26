@@ -37,8 +37,8 @@ import {
       // CGST 
       let cgstRate = eval(GSTrate / 2);
 
-      setCGST(eval(cgstRate * eqution) / 100)
-      setSGST(eval(cgstRate * eqution) / 100)
+      setCGST(eval(cgstRate * IniAmount) / 100)
+      setSGST(eval(cgstRate * IniAmount) / 100)
 
     };
 
@@ -48,6 +48,7 @@ import {
       setTotalAmount(0);
       setCGST(0);
       setSGST(0)
+   
     };
   
     return (

@@ -19,8 +19,8 @@ import GSTcalculator from './src/containers/GSTCalculator'
 export default function App() {
   return (
     <View style={{flex: 1,}}>
-      {/* <Calculator /> */}
-      <GSTcalculator />
+      <Calculator />
+      {/* <GSTcalculator /> */}
     </View>
 
   )
