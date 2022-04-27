@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text,StyleSheet,ImageBackground } from 'react-native'
 import React from 'react'
 import First from './src/containers/First'
 import Demo from './src/containers/Demo'
@@ -13,15 +13,28 @@ import MediineData from './src/containers/MediineData'
 import Watch2 from './src/containers/Watch2'
 import Calculator from './src/containers/Calculator'
 import GSTcalculator from './src/containers/GSTCalculator'
+import KBC from './src/containers/KBC'
 
 
 
 export default function App() {
   return (
+    <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1,}}>
-      <Calculator />
+      {/* <Calculator /> */}
       {/* <GSTcalculator /> */}
+      <KBC />
     </View>
+    </ImageBackground>
 
   )
 }
+
+const styles = StyleSheet.create({
+  image: {
+    // backgroundColor: 'black',
+    flex: 1,
+    
+    // opacity: 0.5,
+  },
+}) 
