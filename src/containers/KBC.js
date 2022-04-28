@@ -79,6 +79,7 @@ import {
   
   const styles = StyleSheet.create({
     container: {
+      marginTop: 50,
       padding: 20,
       flex: 1,
       justifyContent: 'center',

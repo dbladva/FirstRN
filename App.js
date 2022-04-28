@@ -14,27 +14,24 @@ import Watch2 from './src/containers/Watch2'
 import Calculator from './src/containers/Calculator'
 import GSTcalculator from './src/containers/GSTCalculator'
 import KBC from './src/containers/KBC'
+import KbcHome from './src/containers/KBC_App/KbcHome'
 
 
 
 export default function App() {
   return (
-    <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
+    // <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1,}}>
-      {/* <Calculator /> */}
-      {/* <GSTcalculator /> */}
-      <KBC />
+      {/* <KBC /> */}
+      <KbcHome/>
     </View>
-    </ImageBackground>
+    // </ImageBackground>
 
   )
 }
 
 const styles = StyleSheet.create({
   image: {
-    // backgroundColor: 'black',
     flex: 1,
-    
-    // opacity: 0.5,
   },
 }) 
