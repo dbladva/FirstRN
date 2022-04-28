@@ -15,6 +15,8 @@ import Calculator from './src/containers/Calculator'
 import GSTcalculator from './src/containers/GSTCalculator'
 import KBC from './src/containers/KBC'
 import KbcHome from './src/containers/KBC_App/KbcHome'
+import Kbc_Qestions from './src/containers/KBC_App/Kbc_Qestions'
+import Kbc_Result from './src/containers/KBC_App/Kbc_Result'
 
 
 
@@ -22,8 +24,9 @@ export default function App() {
   return (
     // <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1,}}>
-      {/* <KBC /> */}
-      <KbcHome/>
+      {/* <KbcHome/> */}
+      {/* <Kbc_Qestions /> */}
+      <Kbc_Result />
     </View>
     // </ImageBackground>
 
