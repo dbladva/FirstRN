@@ -1,53 +1,80 @@
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
-import Question_Data from './Data'
-
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import Question_Data from './Data';
 
 export default function Kbc_Qestions() {
-
-
-
   const Data = Question_Data;
+  
   // let length = Data.length()
 
   // console.log(Data.length);
+  const [Timer,setTimer] = useState(30)
   const [current_Index, setcurrent_Index] = useState(0);
+  const [Score, setScore] = useState(0)
+
+
+  // Timer
+  const TimerHandler = () => {
+    console.log('Call');
+    setTimer(Timer - 1)
+  }
+
+
+  useEffect(
+    () => {
+     setInterval(() => TimerHandler(), 1000);
+  }, [])
+
+    
+ 
+
 
 
   const QuestionHandler = () => {
-    return (
-      <Text>{Data[current_Index].question}</Text>
-    )
-  }
+    return <Text>{Data[current_Index].question}</Text>;
+  };
 
   const mcqHandler = () => {
-    return (
-      Data[current_Index].options.map((o) => {
-        return (
-          <TouchableOpacity>
-            <View style={styles.mcqView}>
-              <Text style={styles.mcqText}>{o}</Text>
-            </View>
-          </TouchableOpacity>
-        )
-      })
-    )
+    return Data[current_Index].options.map(o => {
+      return (
+        <TouchableOpacity onPress={() => CheckAnswer(o)}>
+          <View style={styles.mcqView}>
+            <Text style={styles.mcqText}>{o}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    });
+  };
 
+  const CheckAnswer = (SelectedOp) => {
+      if(SelectedOp === Data[current_Index].current_ans){
+        setScore(Score+1)
+      }
   }
 
   const newxtQuestionHandler = () => {
-    setcurrent_Index(current_Index + 1)
-  }
+    setcurrent_Index(current_Index + 1);
+  };
 
   const renderNext = () => {
     return (
       <TouchableOpacity onPress={() => newxtQuestionHandler()}>
-        <Text style={styles.NextBtn}>
-          Next
-        </Text>
+        <Text style={styles.NextBtn}>Next</Text>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
+
+  const QuestionCountHandler = () => {
+    let count = current_Index + 1;
+    let length = Data.length;
+    return (
+      <View style={styles.QuetionCount}>
+        <Text style={styles.QueText}>
+          Question : {count}/{length}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -71,24 +98,22 @@ export default function Kbc_Qestions() {
           style={styles.watchTimer}
           source={require('../../../assets/images/watch.png')}
         />
+
+        <Text>{Timer}</Text>
       </View>
-      <View style={styles.QuetionCount}>
-        <Text style={styles.QueText}>Question 1/10</Text>
-      </View>
+
+      {QuestionCountHandler()}
+
       <View style={styles.MainQAView}>
         <View style={styles.questionView}>
-          <Text style={styles.ques_Text}>
-            {QuestionHandler()}
-          </Text>
+          <Text style={styles.ques_Text}>{QuestionHandler()}</Text>
         </View>
 
         {mcqHandler()}
+
         {renderNext()}
-
-
-
       </View>
-
+      <Text style={{textAlign: 'center',alignItems: 'center',justifyContent: 'center',}}>{Score}</Text>
     </View>
   );
 }
@@ -126,6 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     marginBottom: 20,
+    justifyContent: 'space-around',
     marginTop: 20,
     padding: 20,
   },
@@ -156,14 +182,14 @@ const styles = StyleSheet.create({
   ques_Text: {
     color: 'black',
     margin: 20,
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: '500',
   },
   mcqView: {
     borderWidth: 1,
     marginTop: 10,
     marginBottom: 10,
-    padding: 20,
+    padding: 10,
     borderRadius: 10,
   },
   mcqText: {
@@ -173,6 +199,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   NextBtn: {
+    color: 'black',
     backgroundColor: '#bbdefb',
     padding: 10,
     textAlign: 'center',
