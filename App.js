@@ -25,8 +25,8 @@ export default function App() {
     // <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1,}}>
       {/* <KbcHome/> */}
-      {/* <Kbc_Qestions /> */}
-      <Kbc_Result />
+      <Kbc_Qestions />
+      {/* <Kbc_Result /> */}
     </View>
     // </ImageBackground>
 

@@ -37,11 +37,14 @@ export default function KbcHome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
     paddingLeft: 25,
     paddingRight: 25,
   },
-  TitleText: {},
+  TitleText:
+  {
+    color: 'white',
+  },
   LogoView: {
     flex: 2,
     alignItems: 'flex-start',
@@ -68,18 +71,17 @@ const styles = StyleSheet.create({
   },
   InputName: {
     width: '100%',
-    color: '#ffffff',
+    // color: '#ffffff',
     height: 50,
-    borderColor: 'black',
-    backgroundColor: '#212121',
+    // backgroundColor: '#212121',
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: 'black',
     borderRadius: 8,
     padding: 10,
   },
   BtnText: {
-      fontSize: 20,
-      color: 'black',
+    fontSize: 20,
+    color: 'black',
     borderColor: 'gray',
     backgroundColor: '#bbdefb',
     borderWidth: 1,

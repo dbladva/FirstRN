@@ -1,7 +1,54 @@
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import Question_Data from './Data'
+
 
 export default function Kbc_Qestions() {
+
+
+
+  const Data = Question_Data;
+  // let length = Data.length()
+
+  // console.log(Data.length);
+  const [current_Index, setcurrent_Index] = useState(0);
+
+
+  const QuestionHandler = () => {
+    return (
+      <Text>{Data[current_Index].question}</Text>
+    )
+  }
+
+  const mcqHandler = () => {
+    return (
+      Data[current_Index].options.map((o) => {
+        return (
+          <TouchableOpacity>
+            <View style={styles.mcqView}>
+              <Text style={styles.mcqText}>{o}</Text>
+            </View>
+          </TouchableOpacity>
+        )
+      })
+    )
+
+  }
+
+  const newxtQuestionHandler = () => {
+    setcurrent_Index(current_Index + 1)
+  }
+
+  const renderNext = () => {
+    return (
+      <TouchableOpacity onPress={() => newxtQuestionHandler()}>
+        <Text style={styles.NextBtn}>
+          Next
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.NavigationView}>
@@ -31,43 +78,17 @@ export default function Kbc_Qestions() {
       <View style={styles.MainQAView}>
         <View style={styles.questionView}>
           <Text style={styles.ques_Text}>
-            Flutter is an Open Source UI Software devlopment Kit create by
-            ______
+            {QuestionHandler()}
           </Text>
         </View>
-            <TouchableOpacity>
-        <View style={styles.mcqView}>
-          <Text style={styles.mcqText}>1. Google</Text>
-        </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-        <View style={styles.mcqView}>
-          <Text style={styles.mcqText}>2. Apple</Text>
-        </View>
-          </TouchableOpacity>
-            <TouchableOpacity>
-        <View style={styles.mcqView}>
-          <Text style={styles.mcqText}>3. Microsoft</Text>
-        </View>
-          </TouchableOpacity>
-            <TouchableOpacity>
-        <View style={styles.mcqView}>
-          <Text style={styles.mcqText}>4. Facebook</Text>
-        </View>
-          </TouchableOpacity>
-        {/* <View style={{flex: 1}}>
-          <Text>Helllooooo</Text>
-        </View>
-        <View style={{flex: 1, backgroundColor: 'black'}}>
-          <Text>Helllooooo</Text>
-        </View>
-        <View style={{flex: 1, backgroundColor: 'blue'}}>
-          <Text>Helllooooo</Text>
-        </View>
-        <View style={{flex: 1, backgroundColor: 'yellow'}}>
-          <Text>Helllooooo</Text>
-        </View> */}
+
+        {mcqHandler()}
+        {renderNext()}
+
+
+
       </View>
+
     </View>
   );
 }
@@ -114,6 +135,7 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   skipBtn: {
+    color: 'white',
     fontSize: 20,
     textAlign: 'right',
     marginRight: 5,
@@ -137,17 +159,24 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '500',
   },
-  mcqView:{
-      borderWidth: 1,
-      marginTop: 10,
-      marginBottom: 10,
-      padding: 20,
-      borderRadius: 10,
+  mcqView: {
+    borderWidth: 1,
+    marginTop: 10,
+    marginBottom: 10,
+    padding: 20,
+    borderRadius: 10,
   },
-  mcqText:{
+  mcqText: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'capitalize',
-  }
+  },
+  NextBtn: {
+    backgroundColor: '#bbdefb',
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 20,
+    borderRadius: 10,
+  },
 });
