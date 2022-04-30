@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native';
 import React from 'react';
 
 export default function Kbc_Result() {
@@ -12,10 +12,12 @@ export default function Kbc_Result() {
       </View>
       <View style={styles.scoreText}>
         <Text style={styles.Scoretext}>Score</Text>
-        <Text style={styles.ScoretextResult}>Score</Text>
+        <Text style={styles.ScoretextResult}>0</Text>
       </View>
       <View style={styles.reTryBtn}>
-        <Text style={styles.Scoretext}>Hello</Text>
+      <TouchableOpacity onPress={() => Retry()}>
+        <Text style={styles.NextBtn}>Retry</Text>
+      </TouchableOpacity>
       </View>
     </View>
   );
@@ -51,5 +53,17 @@ const styles = StyleSheet.create({
   },
   ScoretextResult:{
       textAlign: 'center',
+      color: 'white',
+      textDecorationLine: 'underline',
+      textDecorationColor: 'red',
+      textDecorationStyle: 'solid'
+  },
+  NextBtn:{
+    color: 'black',
+    backgroundColor: '#bbdefb',
+    padding: 8,
+    textAlign: 'center',
+    fontSize: 20,
+    borderRadius: 5,
   }
 });

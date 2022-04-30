@@ -1,6 +1,7 @@
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
+import KbcHome from './KbcHome';
 
 export default function Kbc_Qestions() {
   const Data = Question_Data;
@@ -12,24 +13,7 @@ export default function Kbc_Qestions() {
   const [current_Index, setcurrent_Index] = useState(0);
   const [Score, setScore] = useState(0)
 
-
-  // Timer
-  const TimerHandler = () => {
-    console.log('Call');
-    setTimer(Timer - 1)
-  }
-
-
-  useEffect(
-    () => {
-     setInterval(() => TimerHandler(), 1000);
-  }, [])
-
     
- 
-
-
-
   const QuestionHandler = () => {
     return <Text>{Data[current_Index].question}</Text>;
   };
@@ -53,7 +37,11 @@ export default function Kbc_Qestions() {
   }
 
   const newxtQuestionHandler = () => {
-    setcurrent_Index(current_Index + 1);
+    if(current_Index < Data.length - 1){
+      setcurrent_Index(current_Index + 1);
+    }else{
+      setcurrent_Index(current_Index)
+    }
   };
 
   const renderNext = () => {
@@ -102,6 +90,7 @@ export default function Kbc_Qestions() {
         <Text>{Timer}</Text>
       </View>
 
+
       {QuestionCountHandler()}
 
       <View style={styles.MainQAView}>
@@ -116,6 +105,7 @@ export default function Kbc_Qestions() {
       <Text style={{textAlign: 'center',alignItems: 'center',justifyContent: 'center',}}>{Score}</Text>
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -148,7 +138,7 @@ const styles = StyleSheet.create({
   MainQAView: {
     margin: 10,
     flex: 6,
-    backgroundColor: 'white',
+    backgroundColor: '#bbdefb',
     borderRadius: 20,
     marginBottom: 20,
     justifyContent: 'space-around',
@@ -172,6 +162,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
   QueText: {
+
     paddingLeft: 15,
     fontSize: 30,
     // color: '#bbdefb',
@@ -194,7 +185,7 @@ const styles = StyleSheet.create({
   },
   mcqText: {
     color: 'black',
-    fontWeight: 'bold',
+    fontWeight: '500',
     fontSize: 20,
     textTransform: 'capitalize',
   },
@@ -206,4 +197,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 10,
   },
+
+  
 });
