@@ -5,15 +5,14 @@ import KbcHome from './KbcHome';
 
 export default function Kbc_Qestions() {
   const Data = Question_Data;
-  
+
   // let length = Data.length()
 
   // console.log(Data.length);
-  const [Timer,setTimer] = useState(30)
+  const [Timer, setTimer] = useState(30);
   const [current_Index, setcurrent_Index] = useState(0);
-  const [Score, setScore] = useState(0)
+  const [Score, setScore] = useState(0);
 
-    
   const QuestionHandler = () => {
     return <Text>{Data[current_Index].question}</Text>;
   };
@@ -30,17 +29,17 @@ export default function Kbc_Qestions() {
     });
   };
 
-  const CheckAnswer = (SelectedOp) => {
-      if(SelectedOp === Data[current_Index].current_ans){
-        setScore(Score+1)
-      }
-  }
+  const CheckAnswer = SelectedOp => {
+    if (SelectedOp === Data[current_Index].current_ans) {
+      setScore(Score + 1);
+    }
+  };
 
   const newxtQuestionHandler = () => {
-    if(current_Index < Data.length - 1){
+    if (current_Index < Data.length - 1) {
       setcurrent_Index(current_Index + 1);
-    }else{
-      setcurrent_Index(current_Index)
+    } else {
+      setcurrent_Index(current_Index);
     }
   };
 
@@ -90,7 +89,6 @@ export default function Kbc_Qestions() {
         <Text>{Timer}</Text>
       </View>
 
-
       {QuestionCountHandler()}
 
       <View style={styles.MainQAView}>
@@ -102,10 +100,16 @@ export default function Kbc_Qestions() {
 
         {renderNext()}
       </View>
-      <Text style={{textAlign: 'center',alignItems: 'center',justifyContent: 'center',}}>{Score}</Text>
+      <Text
+        style={{
+          textAlign: 'center',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {Score}
+      </Text>
     </View>
   );
-  
 }
 
 const styles = StyleSheet.create({
@@ -162,7 +166,6 @@ const styles = StyleSheet.create({
     width: 40,
   },
   QueText: {
-
     paddingLeft: 15,
     fontSize: 30,
     // color: '#bbdefb',
@@ -197,6 +200,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 10,
   },
-
-  
 });
