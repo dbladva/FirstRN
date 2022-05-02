@@ -2,60 +2,73 @@ import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
 
-
 export default function Kbc_Qestions() {
-
-
-
   const Data = Question_Data;
 
-  // let length = Data.length()
-
-  // console.log(Data.length);
-  const [Timer, setTimer] = useState(30);
   const [current_Index, setcurrent_Index] = useState(0);
   const [Score, setScore] = useState(0);
-  const [disbled, setdisbled] = useState('')
-  const [seconds, setSeconds] = useState(15);
+  const [seconds, setSeconds] = useState(10);
+  const [NextBtn, setNextBtn] = useState('Next');
+  const [disabled, setDisabled] = useState(false);
+  const [Ans, setAns] = useState(true);
 
-
+  // Countdown Secound
   useEffect(() => {
-      let myInterval = setInterval(() => {
-          if (seconds > 0) {
-              setSeconds(seconds - 1);
+    let myInterval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds < 1) {
+        if (current_Index < Data.length - 1) {
+          setcurrent_Index(current_Index + 1);
+          setSeconds(10);
+          setDisabled(false);
+          // Submit Btn
+          if (current_Index === Data.length - 2) {
+            setNextBtn('Submit');
           }
-          if(seconds < 1){
-            setcurrent_Index(current_Index + 1)
-            setSeconds(10)
-          }
-      }, 1000)
-      return () => {
-          clearInterval(myInterval);
-      };
+        } else {
+          setcurrent_Index(current_Index);
+        }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(myInterval);
+    };
   });
 
-
+  // Question Handler
   const QuestionHandler = () => {
     return <Text>{Data[current_Index].question}</Text>;
   };
 
+  // MCQ Handler
   const mcqHandler = () => {
     return Data[current_Index].options.map(o => {
       return (
-        <TouchableOpacity disabled = { disbled  === '' ? false : true } onPress={() => CheckAnswer(o)} >
+        <TouchableOpacity
+          disabled={disabled}
+          onPress={() => {
+            CheckAnswer(o);
+            setDisabled(true);
+          }}>
           <View style={styles.mcqView}>
-            <Text style={[ o == Data[current_Index].current_ans  ? styles.GreenAns : styles.mcqText]}>{o}</Text>
+            <Text
+              // style={styles.mcqText}
+              style={[Ans === o ? styles.GreenAns : styles.mcqText,{
+               }]}>
+              {o}
+            </Text>
           </View>
         </TouchableOpacity>
       );
     });
   };
-  
 
+  // Chack Answer For Count And Click Change Question
   const CheckAnswer = SelectedOp => {
-
-    setdisbled(SelectedOp)
     if (SelectedOp === Data[current_Index].current_ans) {
+      setAns(SelectedOp);
       setScore(Score + 1);
     }
   };
@@ -63,6 +76,12 @@ export default function Kbc_Qestions() {
   const newxtQuestionHandler = () => {
     if (current_Index < Data.length - 1) {
       setcurrent_Index(current_Index + 1);
+      setSeconds(10);
+
+      // Submit Btn
+      if (current_Index === Data.length - 2) {
+        setNextBtn('Submit');
+      }
     } else {
       setcurrent_Index(current_Index);
     }
@@ -70,12 +89,18 @@ export default function Kbc_Qestions() {
 
   const renderNext = () => {
     return (
-      <TouchableOpacity onPress={() => newxtQuestionHandler()}>
-        <Text style={styles.NextBtn}>Next</Text>
+      <TouchableOpacity
+        onPress={() => {
+          newxtQuestionHandler();
+          setDisabled(false);
+          setAns(false);
+        }}>
+        <Text style={styles.NextBtn}>{NextBtn}</Text>
       </TouchableOpacity>
     );
   };
 
+  // Question No Checker
   const QuestionCountHandler = () => {
     let count = current_Index + 1;
     let length = Data.length;
@@ -105,13 +130,17 @@ export default function Kbc_Qestions() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* Timer */}
       <View style={styles.TimerView}>
         <Image
           style={styles.watchTimer}
           source={require('../../../assets/images/watch.png')}
         />
-
-        <Text style={{color: 'white',}}>{seconds}</Text>
+        <Text
+          style={[seconds <= 5 ? styles.TimeColorWarning : styles.timeColor]}>
+          {seconds}
+        </Text>
       </View>
 
       {QuestionCountHandler()}
@@ -125,16 +154,8 @@ export default function Kbc_Qestions() {
 
         {renderNext()}
       </View>
-      <Text
-        style={{
-          textAlign: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          marginBottom: 30,
-        }}>
-        {Score}
-      </Text>
+
+      <Text style={styles.scoreCss}>{Score}</Text>
     </View>
   );
 }
@@ -159,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   QuetionCount: {
-    flex: 0.8,
+    flex: 1,
     justifyContent: 'center',
     borderBottomWidth: 1,
     borderBottomColor: 'white',
@@ -189,12 +210,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   watchTimer: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
   },
   QueText: {
     paddingLeft: 15,
-    fontSize: 30,
+    fontSize: 25,
     // color: '#bbdefb',
     color: 'white',
     opacity: 0.8,
@@ -215,23 +236,57 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   mcqText: {
-    color: 'black',
-    fontWeight: '500',
+    // color: 'red',
+    // fontWeight: '500',
+    fontSize: 20,
+    textTransform: 'capitalize',
+  },
+  redText:{
+color: 'red',
+    // fontWeight: '500',
     fontSize: 20,
     textTransform: 'capitalize',
   },
   NextBtn: {
-    color: 'black',
+    color: '#000000',
     backgroundColor: '#bbdefb',
     padding: 10,
     textAlign: 'center',
     fontSize: 20,
     borderRadius: 10,
   },
-  GreenAns:{
+  GreenAns: {
     color: 'green',
     fontWeight: '500',
     fontSize: 20,
     textTransform: 'capitalize',
-  }
+  },
+  TimeColorWarning: {
+    color: 'red',
+    fontSize: 25,
+    fontWeight: 'bold',
+    // textShadowColor: 'white',
+    // textShadowRadius: 10,
+    // textShadowOffset: {width: 6, height: 4},
+  },
+  WhiteTextmcq: {
+    color: 'yellow',
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  timeColor: {
+    fontSize: 25,
+    color: 'white',
+    fontWeight: 'bold',
+    textShadowColor: 'gray',
+    textShadowRadius: 10,
+    textShadowOffset: {height: 3, width: 3},
+  },
+  scoreCss: {
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    marginBottom: 30,
+  },
 });

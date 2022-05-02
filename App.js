@@ -21,7 +21,6 @@ import Timer from './src/containers/Coiuntdown';
 
 export default function App() {
   return (
-    // <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1}}>
       {/* <KbcHome/> */}
       <Kbc_Qestions />
@@ -29,12 +28,6 @@ export default function App() {
       {/* <MediineData /> */}
       {/* <Timer /> */}
     </View>
-    // </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-  },
-});
+// 
