@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   Scoretext: {
       fontSize: 40,
-
+      color: 'white',
   },
   winerLogo: {
     flex: 1,

@@ -17,15 +17,17 @@ import KBC from './src/containers/KBC';
 import KbcHome from './src/containers/KBC_App/KbcHome';
 import Kbc_Qestions from './src/containers/KBC_App/Kbc_Qestions';
 import Kbc_Result from './src/containers/KBC_App/Kbc_Result';
+import Timer from './src/containers/Coiuntdown';
 
 export default function App() {
   return (
     // <ImageBackground source={require('../FirstRN/assets/images/3.jpg')} resizeMode="cover" style={styles.image}>
     <View style={{flex: 1}}>
       {/* <KbcHome/> */}
-      {/* <Kbc_Qestions /> */}
+      <Kbc_Qestions />
       {/* <Kbc_Result /> */}
       {/* <MediineData /> */}
+      {/* <Timer /> */}
     </View>
     // </ImageBackground>
   );

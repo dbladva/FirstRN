@@ -1,9 +1,12 @@
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
-import KbcHome from './KbcHome';
+
 
 export default function Kbc_Qestions() {
+
+
+
   const Data = Question_Data;
 
   // let length = Data.length()
@@ -12,6 +15,25 @@ export default function Kbc_Qestions() {
   const [Timer, setTimer] = useState(30);
   const [current_Index, setcurrent_Index] = useState(0);
   const [Score, setScore] = useState(0);
+  const [disbled, setdisbled] = useState('')
+  const [seconds, setSeconds] = useState(15);
+
+
+  useEffect(() => {
+      let myInterval = setInterval(() => {
+          if (seconds > 0) {
+              setSeconds(seconds - 1);
+          }
+          if(seconds < 1){
+            setcurrent_Index(current_Index + 1)
+            setSeconds(10)
+          }
+      }, 1000)
+      return () => {
+          clearInterval(myInterval);
+      };
+  });
+
 
   const QuestionHandler = () => {
     return <Text>{Data[current_Index].question}</Text>;
@@ -20,16 +42,19 @@ export default function Kbc_Qestions() {
   const mcqHandler = () => {
     return Data[current_Index].options.map(o => {
       return (
-        <TouchableOpacity onPress={() => CheckAnswer(o)}>
+        <TouchableOpacity disabled = { disbled  === '' ? false : true } onPress={() => CheckAnswer(o)} >
           <View style={styles.mcqView}>
-            <Text style={styles.mcqText}>{o}</Text>
+            <Text style={[ o == Data[current_Index].current_ans  ? styles.GreenAns : styles.mcqText]}>{o}</Text>
           </View>
         </TouchableOpacity>
       );
     });
   };
+  
 
   const CheckAnswer = SelectedOp => {
+
+    setdisbled(SelectedOp)
     if (SelectedOp === Data[current_Index].current_ans) {
       setScore(Score + 1);
     }
@@ -86,7 +111,7 @@ export default function Kbc_Qestions() {
           source={require('../../../assets/images/watch.png')}
         />
 
-        <Text>{Timer}</Text>
+        <Text style={{color: 'white',}}>{seconds}</Text>
       </View>
 
       {QuestionCountHandler()}
@@ -105,6 +130,8 @@ export default function Kbc_Qestions() {
           textAlign: 'center',
           alignItems: 'center',
           justifyContent: 'center',
+          color: 'white',
+          marginBottom: 30,
         }}>
         {Score}
       </Text>
@@ -176,6 +203,7 @@ const styles = StyleSheet.create({
   ques_Text: {
     color: 'black',
     margin: 20,
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: '500',
   },
@@ -200,4 +228,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 10,
   },
+  GreenAns:{
+    color: 'green',
+    fontWeight: '500',
+    fontSize: 20,
+    textTransform: 'capitalize',
+  }
 });
