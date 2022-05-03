@@ -1,4 +1,11 @@
-import {View, StyleSheet, Text, Image, TouchableOpacity,TextInput} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
 
@@ -9,34 +16,38 @@ export default function Kbc_Qestions() {
   const [seconds, setSeconds] = useState(30);
   const [NextBtn, setNextBtn] = useState('Next');
   const [disabled, setDisabled] = useState(false);
-  const [Ans, setAns] = useState(true);
-  const [tindex, setTindex] = useState();
-  const [screen,setScreen] = useState(0)
+  const [Ans, setAns] = useState('');
+  const [wrongAns, setWrongAns] = useState(false);
+  const [screen, setScreen] = useState(0);
 
   // Countdown Secound
+ 
   useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds < 1) {
-        if (current_Index < Data.length - 1) {
-          setcurrent_Index(current_Index + 1);
-          setSeconds(30);
-          
-
-          // Submit Btn
-          if (current_Index === Data.length - 2) {
-            setNextBtn('Submit');
-          }
-        } else {
-          setcurrent_Index(current_Index);
+    if(screen == 1){
+      let myInterval = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
         }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
+        if (seconds < 1) {
+          if (current_Index < Data.length - 1) {
+            setcurrent_Index(current_Index + 1);
+            setSeconds(30);
+            setWrongAns(false)
+  
+            // Submit Btn
+            if (current_Index === Data.length - 2) {
+              setNextBtn('Submit');
+            }
+          } else {
+            setcurrent_Index(current_Index);
+          }
+        }
+      }, 1000);
+      return () => {
+        clearInterval(myInterval);
+      };
+    }
+    
   });
 
   // Question Handler
@@ -46,7 +57,7 @@ export default function Kbc_Qestions() {
 
   // MCQ Handler
   const mcqHandler = () => {
-    return Data[current_Index].options.map((o,i) => {
+    return Data[current_Index].options.map((o, i) => {
       return (
         <TouchableOpacity
           disabled={disabled}
@@ -56,24 +67,29 @@ export default function Kbc_Qestions() {
             setDisabled(true);
           }}>
           <View style={styles.mcqView}>
-            <Text 
-              // style={[Ans === o ? styles.GreenAns : current_Index === i ? styles.redText : styles.mcqText]}
-              // style={[Ans === o ? styles.GreenAns : Ans !== o styles.mcqText]}
-              >
+            <Text
+              // style={[
+              //   Data[current_Index].current_ans === o ? styles.GreenAns :  styles.mcqText
+              // ]}
+              style={[Ans === o && Ans === Data[current_Index].current_ans ?  styles.GreenAns : Ans === o && Ans !== Data[current_Index].current_ans ? styles.redText : wrongAns === true  &&  o === Data[current_Index].current_ans ? styles.GreenAns : styles.mcqText]}
+            >
               {o}
-            </Text> 
+            </Text>
           </View>
         </TouchableOpacity>
       );
     });
   };
 
+
   // Chack Answer For Count And Click Change Question
   const CheckAnswer = (SelectedOp, i) => {
+    setAns(SelectedOp);
     if (SelectedOp === Data[current_Index].current_ans) {
-      setAns(SelectedOp);
       setScore(Score + 1);
-      setTindex(i)
+      setWrongAns(false)
+    }else{
+      setWrongAns(true)
     }
   };
 
@@ -81,8 +97,7 @@ export default function Kbc_Qestions() {
     if (current_Index < Data.length - 1) {
       setcurrent_Index(current_Index + 1);
       setSeconds(30);
-      
-
+      setWrongAns(false)
       // Submit Btn
       if (current_Index === Data.length - 2) {
         setNextBtn('Submit');
@@ -90,7 +105,6 @@ export default function Kbc_Qestions() {
     } else {
       setcurrent_Index(current_Index);
     }
-    setTindex()
   };
 
   const renderNext = () => {
@@ -100,6 +114,7 @@ export default function Kbc_Qestions() {
           newxtQuestionHandler();
           setDisabled(false);
           setAns(false);
+          setWrongAns(false)
         }}>
         <Text style={styles.NextBtn}>{NextBtn}</Text>
       </TouchableOpacity>
@@ -121,77 +136,75 @@ export default function Kbc_Qestions() {
 
   return (
     <View style={styles.container}>
-      {
-        screen === 0 && 
+      {screen === 0 && (
         <>
-        <View style={styles.LogoView}>
-        <Text style={styles.TitleText}>Let's Play Quiz,</Text>
-        <Text style={styles.SubTitleText}>Enter Your information below</Text>
-     
-      </View>
-      <View style={styles.KbcContentView}>
-        <TextInput
-          style={styles.InputName}
-          
-          placeholder="Enter Full Name"
-        />
-      </View>
+          <View style={styles.LogoView}>
+            <Text style={styles.TitleText}>Let's Play Quiz,</Text>
+            <Text style={styles.SubTitleText}>
+              Enter Your information below
+            </Text>
+          </View>
+          <View style={styles.KbcContentView}>
+            <TextInput style={styles.InputName} placeholder="Enter Full Name" />
+          </View>
 
-      <View style={styles.StartView}>
-        <TouchableOpacity onPress={() => {setScreen(1)}}>
-          <Text style={styles.BtnText}>Let's Start Quiz</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.StartView}>
+            <TouchableOpacity
+              onPress={() => {
+                setScreen(1);
+              }}>
+              <Text style={styles.BtnText}>Let's Start Quiz</Text>
+            </TouchableOpacity>
+          </View>
         </>
-      }
-      
-      {
-        screen === 1 && 
-        
-      <>
-      <View style={styles.NavigationView}>
-        <View>
-          <TouchableOpacity>
+      )}
+
+      {screen === 1 && (
+        <>
+          <View style={styles.NavigationView}>
+            <View>
+              <TouchableOpacity>
+                <Image
+                  style={styles.BackArrow}
+                  source={require('../../../assets/images/left.png')}
+                />
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity>
+                <Text style={styles.skipBtn}>Skip</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.TimerView}>
             <Image
-              style={styles.BackArrow}
-              source={require('../../../assets/images/left.png')}
+              style={styles.watchTimer}
+              source={require('../../../assets/images/watch.png')}
             />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity>
-            <Text style={styles.skipBtn}>Skip</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            <Text
+              style={[
+                seconds <= 10 ? styles.TimeColorWarning : styles.timeColor,
+              ]}>
+              {seconds}
+            </Text>
+          </View>
 
-     
-      <View style={styles.TimerView}>
-        <Image
-          style={styles.watchTimer}
-          source={require('../../../assets/images/watch.png')}
-        />
-        <Text
-          style={[seconds <= 10 ? styles.TimeColorWarning : styles.timeColor]}>
-          {seconds}
-        </Text>
-      </View>
+          {QuestionCountHandler()}
 
-      {QuestionCountHandler()}
+          <View style={styles.MainQAView}>
+            <View style={styles.questionView}>
+              <Text style={styles.ques_Text}>{QuestionHandler()}</Text>
+            </View>
 
-      <View style={styles.MainQAView}>
-        <View style={styles.questionView}>
-          <Text style={styles.ques_Text}>{QuestionHandler()}</Text>
-        </View>
+            {mcqHandler()}
 
-        {mcqHandler()}
+            {renderNext()}
+          </View>
 
-        {renderNext()}
-      </View>
-
-      <Text style={styles.scoreCss}>{Score}</Text>
-      </>
-}
+          <Text style={styles.scoreCss}>{Score}</Text>
+        </>
+      )}
     </View>
   );
 }
@@ -204,8 +217,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
 
-  TitleText:
-  {
+  TitleText: {
     color: 'white',
   },
   LogoView: {
@@ -234,9 +246,9 @@ const styles = StyleSheet.create({
   },
   InputName: {
     width: '100%',
-    // color: '#ffffff',
+    color: 'White',
     height: 50,
-    // backgroundColor: '#212121',
+    backgroundColor: '#212121',
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 8,
@@ -325,13 +337,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   mcqText: {
-    // color: 'red',
+    color: 'black',
     // fontWeight: '500',
     fontSize: 20,
     textTransform: 'capitalize',
   },
-  redText:{
-color: 'red',
+  redText: {
+    color: 'red',
     // fontWeight: '500',
     fontSize: 20,
     textTransform: 'capitalize',
