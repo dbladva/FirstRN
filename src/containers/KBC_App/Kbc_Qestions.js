@@ -1,16 +1,17 @@
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity,TextInput} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
 
 export default function Kbc_Qestions() {
   const Data = Question_Data;
-
   const [current_Index, setcurrent_Index] = useState(0);
   const [Score, setScore] = useState(0);
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(30);
   const [NextBtn, setNextBtn] = useState('Next');
   const [disabled, setDisabled] = useState(false);
   const [Ans, setAns] = useState(true);
+  const [tindex, setTindex] = useState();
+  const [screen,setScreen] = useState(0)
 
   // Countdown Secound
   useEffect(() => {
@@ -21,8 +22,9 @@ export default function Kbc_Qestions() {
       if (seconds < 1) {
         if (current_Index < Data.length - 1) {
           setcurrent_Index(current_Index + 1);
-          setSeconds(10);
-          setDisabled(false);
+          setSeconds(30);
+          
+
           // Submit Btn
           if (current_Index === Data.length - 2) {
             setNextBtn('Submit');
@@ -44,21 +46,22 @@ export default function Kbc_Qestions() {
 
   // MCQ Handler
   const mcqHandler = () => {
-    return Data[current_Index].options.map(o => {
+    return Data[current_Index].options.map((o,i) => {
       return (
         <TouchableOpacity
           disabled={disabled}
           onPress={() => {
-            CheckAnswer(o);
+            CheckAnswer(o, i);
+            //setTindex(i)
             setDisabled(true);
           }}>
           <View style={styles.mcqView}>
-            <Text
-              // style={styles.mcqText}
-              style={[Ans === o ? styles.GreenAns : styles.mcqText,{
-               }]}>
+            <Text 
+              // style={[Ans === o ? styles.GreenAns : current_Index === i ? styles.redText : styles.mcqText]}
+              // style={[Ans === o ? styles.GreenAns : Ans !== o styles.mcqText]}
+              >
               {o}
-            </Text>
+            </Text> 
           </View>
         </TouchableOpacity>
       );
@@ -66,17 +69,19 @@ export default function Kbc_Qestions() {
   };
 
   // Chack Answer For Count And Click Change Question
-  const CheckAnswer = SelectedOp => {
+  const CheckAnswer = (SelectedOp, i) => {
     if (SelectedOp === Data[current_Index].current_ans) {
       setAns(SelectedOp);
       setScore(Score + 1);
+      setTindex(i)
     }
   };
 
   const newxtQuestionHandler = () => {
     if (current_Index < Data.length - 1) {
       setcurrent_Index(current_Index + 1);
-      setSeconds(10);
+      setSeconds(30);
+      
 
       // Submit Btn
       if (current_Index === Data.length - 2) {
@@ -85,6 +90,7 @@ export default function Kbc_Qestions() {
     } else {
       setcurrent_Index(current_Index);
     }
+    setTindex()
   };
 
   const renderNext = () => {
@@ -115,6 +121,34 @@ export default function Kbc_Qestions() {
 
   return (
     <View style={styles.container}>
+      {
+        screen === 0 && 
+        <>
+        <View style={styles.LogoView}>
+        <Text style={styles.TitleText}>Let's Play Quiz,</Text>
+        <Text style={styles.SubTitleText}>Enter Your information below</Text>
+     
+      </View>
+      <View style={styles.KbcContentView}>
+        <TextInput
+          style={styles.InputName}
+          
+          placeholder="Enter Full Name"
+        />
+      </View>
+
+      <View style={styles.StartView}>
+        <TouchableOpacity onPress={() => {setScreen(1)}}>
+          <Text style={styles.BtnText}>Let's Start Quiz</Text>
+        </TouchableOpacity>
+      </View>
+        </>
+      }
+      
+      {
+        screen === 1 && 
+        
+      <>
       <View style={styles.NavigationView}>
         <View>
           <TouchableOpacity>
@@ -131,14 +165,14 @@ export default function Kbc_Qestions() {
         </View>
       </View>
 
-      {/* Timer */}
+     
       <View style={styles.TimerView}>
         <Image
           style={styles.watchTimer}
           source={require('../../../assets/images/watch.png')}
         />
         <Text
-          style={[seconds <= 5 ? styles.TimeColorWarning : styles.timeColor]}>
+          style={[seconds <= 10 ? styles.TimeColorWarning : styles.timeColor]}>
           {seconds}
         </Text>
       </View>
@@ -156,6 +190,8 @@ export default function Kbc_Qestions() {
       </View>
 
       <Text style={styles.scoreCss}>{Score}</Text>
+      </>
+}
     </View>
   );
 }
@@ -167,6 +203,59 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+
+  TitleText:
+  {
+    color: 'white',
+  },
+  LogoView: {
+    flex: 2,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+  },
+  KbcContentView: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  StartView: {
+    flex: 2,
+    // alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  TitleText: {
+    fontSize: 40,
+    fontWeight: '500',
+    textTransform: 'capitalize',
+  },
+  SubTitleText: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  InputName: {
+    width: '100%',
+    // color: '#ffffff',
+    height: 50,
+    // backgroundColor: '#212121',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 8,
+    padding: 10,
+  },
+  BtnText: {
+    fontSize: 20,
+    color: 'black',
+    borderColor: 'gray',
+    backgroundColor: '#bbdefb',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 8,
+    width: '100%',
+    textAlign: 'center',
+    fontWeight: '500',
+    padding: 10,
+  },
+
   NavigationView: {
     flex: 1,
     flexDirection: 'row',
