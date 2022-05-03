@@ -19,11 +19,11 @@ export default function Kbc_Qestions() {
   const [Ans, setAns] = useState('');
   const [wrongAns, setWrongAns] = useState(false);
   const [screen, setScreen] = useState(0);
+  const [userName, setUserName] = useState('Unknown');
 
   // Countdown Secound
- 
   useEffect(() => {
-    if(screen == 1){
+    if (screen == 1) {
       let myInterval = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -32,8 +32,9 @@ export default function Kbc_Qestions() {
           if (current_Index < Data.length - 1) {
             setcurrent_Index(current_Index + 1);
             setSeconds(30);
-            setWrongAns(false)
-  
+            setWrongAns(false);
+            setDisabled(false);
+
             // Submit Btn
             if (current_Index === Data.length - 2) {
               setNextBtn('Submit');
@@ -47,7 +48,6 @@ export default function Kbc_Qestions() {
         clearInterval(myInterval);
       };
     }
-    
   });
 
   // Question Handler
@@ -71,8 +71,15 @@ export default function Kbc_Qestions() {
               // style={[
               //   Data[current_Index].current_ans === o ? styles.GreenAns :  styles.mcqText
               // ]}
-              style={[Ans === o && Ans === Data[current_Index].current_ans ?  styles.GreenAns : Ans === o && Ans !== Data[current_Index].current_ans ? styles.redText : wrongAns === true  &&  o === Data[current_Index].current_ans ? styles.GreenAns : styles.mcqText]}
-            >
+              style={[
+                Ans === o && Ans === Data[current_Index].current_ans
+                  ? styles.GreenAns
+                  : Ans === o && Ans !== Data[current_Index].current_ans
+                  ? styles.redText
+                  : wrongAns === true && o === Data[current_Index].current_ans
+                  ? styles.GreenAns
+                  : styles.mcqText,
+              ]}>
               {o}
             </Text>
           </View>
@@ -81,15 +88,14 @@ export default function Kbc_Qestions() {
     });
   };
 
-
   // Chack Answer For Count And Click Change Question
   const CheckAnswer = (SelectedOp, i) => {
     setAns(SelectedOp);
     if (SelectedOp === Data[current_Index].current_ans) {
       setScore(Score + 1);
-      setWrongAns(false)
-    }else{
-      setWrongAns(true)
+      setWrongAns(false);
+    } else {
+      setWrongAns(true);
     }
   };
 
@@ -97,7 +103,7 @@ export default function Kbc_Qestions() {
     if (current_Index < Data.length - 1) {
       setcurrent_Index(current_Index + 1);
       setSeconds(30);
-      setWrongAns(false)
+      setWrongAns(false);
       // Submit Btn
       if (current_Index === Data.length - 2) {
         setNextBtn('Submit');
@@ -114,7 +120,10 @@ export default function Kbc_Qestions() {
           newxtQuestionHandler();
           setDisabled(false);
           setAns(false);
-          setWrongAns(false)
+          setWrongAns(false);
+          if (NextBtn === 'Submit') {
+            setScreen(2);
+          }
         }}>
         <Text style={styles.NextBtn}>{NextBtn}</Text>
       </TouchableOpacity>
@@ -135,30 +144,39 @@ export default function Kbc_Qestions() {
   };
 
   return (
+    // -------------------------- KBC Home -----------------------------------------
     <View style={styles.container}>
       {screen === 0 && (
         <>
-          <View style={styles.LogoView}>
-            <Text style={styles.TitleText}>Let's Play Quiz,</Text>
-            <Text style={styles.SubTitleText}>
-              Enter Your information below
-            </Text>
-          </View>
-          <View style={styles.KbcContentView}>
-            <TextInput style={styles.InputName} placeholder="Enter Full Name" />
-          </View>
+          <View style={{flex: 1, padding: 30}}>
+            <View style={styles.LogoView}>
+              <Text style={styles.TitleText}>Let's Play Quiz,</Text>
+              <Text style={styles.SubTitleText}>
+                Enter Your information below
+              </Text>
+            </View>
+            <View style={styles.KbcContentView}>
+              <TextInput
+                onChangeText={a => {
+                  setUserName(a);
+                }}
+                style={styles.InputName}
+                placeholder="Enter Full Name"
+              />
+            </View>
 
-          <View style={styles.StartView}>
-            <TouchableOpacity
-              onPress={() => {
-                setScreen(1);
-              }}>
-              <Text style={styles.BtnText}>Let's Start Quiz</Text>
-            </TouchableOpacity>
+            <View style={styles.StartView}>
+              <TouchableOpacity
+                onPress={() => {
+                  setScreen(1);
+                }}>
+                <Text style={styles.BtnText}>Let's Start Quiz</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </>
       )}
-
+      {/* -------------------- KBC Question ------------------- */}
       {screen === 1 && (
         <>
           <View style={styles.NavigationView}>
@@ -171,7 +189,7 @@ export default function Kbc_Qestions() {
               </TouchableOpacity>
             </View>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => {setScreen(1)}}>
                 <Text style={styles.skipBtn}>Skip</Text>
               </TouchableOpacity>
             </View>
@@ -205,6 +223,51 @@ export default function Kbc_Qestions() {
           <Text style={styles.scoreCss}>{Score}</Text>
         </>
       )}
+
+      {/* ---------------------- KBC Result ---------------------- */}
+
+      {screen === 2 && (
+        <>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <View style={styles.winerLogo}>
+              <Image
+                style={styles.logoWinner}
+                source={require('../../../assets/images/winner.png')}
+              />
+            </View>
+
+            <View style={styles.scoreText}>
+              <Text style={styles.congratulationText}>
+                Congratulation, {userName}!
+              </Text>
+              {/* <Text style={styles.Scoretext}>Score</Text> */}
+              <Text style={styles.ScoretextResult}>
+                Your Score{' '}
+                <Text style={{color: 'orange', fontWeight: 'bold'}}>
+                  {Score}!!
+                </Text>
+              </Text>
+              <View style={{alignItems: 'center', padding: 10}}>
+                <TouchableOpacity style={styles.Leaderbtn}>
+                  <Text style={styles.LeaderBoardText}>View LeaderBoard</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.reTryBtn}>
+              <TouchableOpacity
+                onPress={() => {
+                  setScreen(0);
+                  setScore(0);
+                  setcurrent_Index(0);
+                  setNextBtn('Next');
+                }}>
+                <Text style={styles.NextBtn2}>Retry</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
@@ -217,6 +280,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
 
+  // ------------------------- Kbc Home css-----------------------------------
   TitleText: {
     color: 'white',
   },
@@ -267,6 +331,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     padding: 10,
   },
+
+  // -------------------- Kbc Question Css ------------------------------
 
   NavigationView: {
     flex: 1,
@@ -349,12 +415,11 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   NextBtn: {
+    padding: 10,
     color: '#000000',
     backgroundColor: '#bbdefb',
-    padding: 10,
     textAlign: 'center',
     fontSize: 20,
-    borderRadius: 10,
   },
   GreenAns: {
     color: 'green',
@@ -389,5 +454,72 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: 'white',
     marginBottom: 30,
+  },
+
+  //-------------------- Kbc Result --------------------------
+  scoreText: {
+    flex: 2,
+    justifyContent: 'center',
+    color: 'white',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    width: '80%',
+    margin: 30,
+  },
+  Scoretext: {
+    fontSize: 40,
+    color: 'black',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  winerLogo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoWinner: {
+    width: 120,
+    height: 120,
+  },
+  reTryBtn: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  ScoretextResult: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 30,
+    fontWeight: 'bold',
+    // backgroundColor: 'red'
+    letterSpacing: 3,
+  },
+  NextBtn2: {
+    color: 'black',
+    backgroundColor: 'white',
+    height: 40,
+    textAlignVertical: 'center',
+    width: 200,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    borderRadius: 50,
+    textTransform: 'uppercase',
+  },
+  congratulationText: {
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: '500',
+    color: 'gray',
+  },
+  LeaderBoardText: {
+    textAlign: 'center',
+    color: 'black',
+  },
+  Leaderbtn: {
+    backgroundColor: '#bbdefb',
+    width: '80%',
+    padding: 5,
+    borderRadius: 50,
+    fontWeight: 'bold',
   },
 });
