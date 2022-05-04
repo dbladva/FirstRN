@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-export default function KbcHome() {
+export default function KbcHome({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.LogoView}>
@@ -26,7 +26,7 @@ export default function KbcHome() {
       </View>
 
       <View style={styles.StartView}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Kbc_Qestions')}>
           <Text style={styles.BtnText}>Let's Start Quiz</Text>
         </TouchableOpacity>
       </View>

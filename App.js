@@ -18,16 +18,19 @@ import KbcHome from './src/containers/KBC_App/KbcHome';
 import Kbc_Qestions from './src/containers/KBC_App/Kbc_Qestions';
 import Kbc_Result from './src/containers/KBC_App/Kbc_Result';
 import Timer from './src/containers/Coiuntdown';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={{flex: 1}}>
-      {/* <KbcHome/> */}
-      <Kbc_Qestions />
-      {/* <Kbc_Result /> */}
-      {/* <MediineData /> */}
-      {/* <Timer /> */}
-    </View>
+
+    <NavigationContainer>
+     <Stack.Navigator>
+        <Stack.Screen name="KbcHome" component={KbcHome} />
+        <Stack.Screen name='Kbc_Qestions' component={Kbc_Qestions} />
+        <Stack.Screen name='Kbc_Result' component={Kbc_Result} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-// 

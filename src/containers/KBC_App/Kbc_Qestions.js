@@ -9,7 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import Question_Data from './Data';
 
-export default function Kbc_Qestions() {
+export default function Kbc_Qestions({navigation}) {
   const Data = Question_Data;
   const [current_Index, setcurrent_Index] = useState(0);
   const [Score, setScore] = useState(0);
@@ -18,7 +18,7 @@ export default function Kbc_Qestions() {
   const [disabled, setDisabled] = useState(false);
   const [Ans, setAns] = useState('');
   const [wrongAns, setWrongAns] = useState(false);
-  const [screen, setScreen] = useState(0);
+  const [screen, setScreen] = useState(1);
   const [userName, setUserName] = useState('Unknown');
 
   // Countdown Secound
@@ -122,7 +122,7 @@ export default function Kbc_Qestions() {
           setAns(false);
           setWrongAns(false);
           if (NextBtn === 'Submit') {
-            setScreen(2);
+            navigation.navigate('Kbc_Result',{Score,screen})
           }
         }}>
         <Text style={styles.NextBtn}>{NextBtn}</Text>
@@ -303,8 +303,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '500',
     textTransform: 'capitalize',
+    color: 'white',
   },
   SubTitleText: {
+    color: 'white',
     fontSize: 16,
     fontWeight: '500',
   },
@@ -314,7 +316,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#212121',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
     borderRadius: 8,
     padding: 10,
   },
@@ -396,7 +398,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   mcqView: {
-    borderWidth: 1,
+        borderWidth: 1,
     marginTop: 10,
     marginBottom: 10,
     padding: 10,
@@ -484,13 +486,15 @@ const styles = StyleSheet.create({
   reTryBtn: {
     flex: 1,
     justifyContent: 'center',
+    borderRadius: 50,
   },
   ScoretextResult: {
     textAlign: 'center',
     color: 'black',
     fontSize: 30,
     fontWeight: 'bold',
-    // backgroundColor: 'red'
+    alignItems: 'center',
+    // backgroundColor: 'red',
     letterSpacing: 3,
   },
   NextBtn2: {
@@ -502,8 +506,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    borderRadius: 50,
     textTransform: 'uppercase',
+    borderRadius: 50,
   },
   congratulationText: {
     color: 'black',
