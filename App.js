@@ -1,20 +1,20 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import First from './src/containers/First'
-import Demo from './src/containers/Demo'
 import MedicineData from './src/containers/MedicineData'
-import Counter from './src/containers/Counter'
 import Destructuringg from './src/containers/Destructuringg'
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/component/OLX/Home/HomeScreen'
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={{marginBottom: 20,}}>
-      <MedicineData />
-      <First />
-      <Demo />
-      <Destructuringg />
-      {/* <Counter /> */}
-    </View>
+     <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
