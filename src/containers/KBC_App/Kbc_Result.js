@@ -98,14 +98,13 @@ const styles = StyleSheet.create({
   },
   NextBtn2: {
     color: 'black',
-  
     justifyContent: 'center',
     width: 200,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    padding: 10,
+    padding: 5,
   },
   congratulationText: {
     color: 'black',

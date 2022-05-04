@@ -30,9 +30,11 @@ public class MainActivity extends ReactActivity {
       super(activity, mainComponentName);
     }
     @Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(null);
+    protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
 }
+
+
 
     @Override
     protected ReactRootView createRootView() {
