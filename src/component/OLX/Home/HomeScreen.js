@@ -5,11 +5,17 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Button
 } from 'react-native';
 import React from 'react';
 
+
 export default function HomeScreen({navigation}) {
+
+
   return (
+
+
     <View style={styles.container}>
       <View style={styles.locationAndSearch}>
         <TouchableOpacity>
@@ -30,14 +36,6 @@ export default function HomeScreen({navigation}) {
           <TextInput
             style={styles.Searchinput}
             placeholder="Find Car,Mobile Phones And More..."
-            // onChangeText={onChangeText}
-            // value={text}
-            autoFocus={false}
-            // inlineImageLeft="username"
-            // selectTextOnFocus={false}
-            // showSoftInputOnFocus={false}
-            scrollEnabled={false}
-            
           />
           <TouchableOpacity>
             <Image
@@ -47,7 +45,8 @@ export default function HomeScreen({navigation}) {
           </TouchableOpacity>
         </View>
       </View>
-
+      
+      <Button title='Go To Setting' onPress={() => {navigation.navigate('Detail')}}/>
 
     </View>
   );
