@@ -8,24 +8,26 @@ import SettingScreen from './src/component/OLX/Setting/SettingScreen'
 import Icon from 'react-native-ionicons'
 import Detail from './src/component/OLX/Home/Detail/Detail';
 
+
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+  
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      {/* <HomeStack.Screen name="Home" component={HomeScreen} /> */}
+      <HomeStack.Screen name="Detail" component={Detail} />
+    </HomeStack.Navigator>
+  );
+}
+
+
 export default function App() {
-  const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
-  const HomeStack = createNativeStackNavigator();
   
-  
-  function HomeStackScreen() {
-    return (
-      <HomeStack.Navigator>
-        {/* <HomeStack.Screen name="Home" component={HomeScreen} /> */}
-        <HomeStack.Screen name="Detail" component={Detail} />
-      </HomeStack.Navigator>
-    );
-  }
 
   return (  
-   
-
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
