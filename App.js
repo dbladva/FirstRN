@@ -6,7 +6,8 @@ import HomeScreen from './src/component/OLX/Home/HomeScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingScreen from './src/component/OLX/Setting/SettingScreen'
 import Icon from 'react-native-ionicons'
-import Detail from './src/component/OLX/Home/Detail/Detail';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 
 
@@ -43,7 +44,9 @@ export default function App() {
             }
 
             // You can return any component that you like here!
-            return  <Image style={{height: 20, width: 20,tintColor: 'black'}} source={require('./src/component/OLX/Home/images/house.png')} />;
+            // return  <Image style={{height: 20, width: 20,tintColor: 'black'}} source={require('./src/component/OLX/Home/images/house.png')} />;
+            return  <Entypo  size={20}  color='red' name='heart' />
+            
           },
           tabBarActiveTintColor: 'red',
           tabBarInactiveTintColor: 'gray',
@@ -52,6 +55,7 @@ export default function App() {
       
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingScreen} />
+        
       </Tab.Navigator>
       
     </NavigationContainer>

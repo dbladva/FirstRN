@@ -8,10 +8,30 @@ import {
   Button,
   ScrollView,
   SafeAreaView,
+  FlatList
 } from 'react-native';
 import React from 'react';
 
+const categoryData = [
+  {id: 1 , image: require('../Home/images/cars.png') , title: 'olx autos'},
+   {id: 2 , image: require('../Home/images/properties.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
+]
+
 export default function HomeScreen({navigation}) {
+
+  const renderdata = ({item}) => (
+    <View>
+      <Image style={styles.carsLogo} source={item.image}/>
+      <Text>{item.title}</Text>
+    </View>
+  )
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -56,8 +76,19 @@ export default function HomeScreen({navigation}) {
           </View>
 
           <View style={styles.recomandedItem}>
-            <ScrollView horizontal={true}>
-              <View style={styles.olxAutos}>
+            <View>
+
+              <FlatList 
+              data={categoryData}
+              renderItem={renderdata}
+              keyExtractor={item => item.id}
+              horizontal={true}
+            showsHorizontalScrollIndicator={false}
+              />
+
+            </View>
+            {/* <ScrollView horizontal={true}> */}
+              {/* <View style={styles.olxAutos}>
                 <TouchableOpacity>
                   <Image
                     style={styles.carsLogo}
@@ -171,8 +202,8 @@ export default function HomeScreen({navigation}) {
                   />
                   <Text style={styles.CategoryTitle}>services</Text>
                 </TouchableOpacity>
-              </View>
-            </ScrollView>
+              </View> */}
+            {/* </ScrollView> */}
           </View>
 
           {/* Category */}
