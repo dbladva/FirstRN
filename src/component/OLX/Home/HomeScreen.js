@@ -17,7 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 
-
+// Category Data
 const categoryData = [
   {id: 1, image: require('../Home/images/cars.png'), title: 'olx autos'},
   {id: 2, image: require('../Home/images/properties.png'), title: 'propertry'},
@@ -33,8 +33,7 @@ const categoryData = [
   {id: 12, image: require('../Home/images/services.png'), title: 'services'},
 ];
 
-let image1 = "require('../Home/images/air.jpeg')";
-
+// Item Data
 const ItemData = [
   {
     id: 1,
@@ -214,13 +213,8 @@ const ItemData = [
 export default function HomeScreen({navigation}) {
 
   const [Heart,setHeart] = useState('heart-outlined')
-  // const renderdata = ({item}) => (
-  //   <View>
-  //     <Image style={styles.carsLogo} source={item.image} />
-  //     <Text>{item.title}</Text>
-  //   </View>
-  // );
 
+  // CategoryHandler
   const CategoryHandler = () => {
     return categoryData.map((i, index) => {
       console.log(i.title);
@@ -236,6 +230,7 @@ export default function HomeScreen({navigation}) {
     });
   };
 
+  // ItemHandler
   const renderItem = ({item}) => {
     return (
       <View style={styles.ItemCard}>
@@ -250,12 +245,15 @@ export default function HomeScreen({navigation}) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {
-          if(Heart === 'heart'){
-            setHeart('heart-outlined')
-          }else{
-            setHeart('heart')
-          }
+        <TouchableOpacity onPress={(item) => {
+          // if(item.id === item){
+            if(Heart === 'heart'){
+              setHeart('heart-outlined')
+            }else{
+              setHeart('heart')
+            }
+          // }
+          
         }}
          style={styles.LikeItemBtn}>
           <Entypo size={20} color="red" name={Heart} />
@@ -299,7 +297,7 @@ export default function HomeScreen({navigation}) {
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Browse Categories</Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity >
               <Text style={styles.seeallbtn}>See All</Text>
             </TouchableOpacity>
           </View>
@@ -317,6 +315,7 @@ export default function HomeScreen({navigation}) {
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Fresh Recommandation</Text>
           </View>
+         
 
           <View style={styles.recomadationView}>
             <FlatList
@@ -328,7 +327,7 @@ export default function HomeScreen({navigation}) {
               keyExtractor={item => item.id}
             />
           </View>
-        </ScrollView>
+          </ScrollView>
       </View>
     </SafeAreaView>
   );
