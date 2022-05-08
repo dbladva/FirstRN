@@ -8,40 +8,269 @@ import {
   Button,
   ScrollView,
   SafeAreaView,
-  FlatList
+  FlatList,
+  
 } from 'react-native';
-import React from 'react';
+import  React,{useState} from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+
+
 
 const categoryData = [
-  {id: 1 , image: require('../Home/images/cars.png') , title: 'olx autos'},
-   {id: 2 , image: require('../Home/images/properties.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-   {id: 2 , image: require('../Home/images/location.png') , title: 'propertry'},
-]
+  {id: 1, image: require('../Home/images/cars.png'), title: 'olx autos'},
+  {id: 2, image: require('../Home/images/properties.png'), title: 'propertry'},
+  {id: 3, image: require('../Home/images/mobiles.png'), title: 'Mobiles'},
+  {id: 4, image: require('../Home/images/jobs.png'), title: 'Jobs'},
+  {id: 5, image: require('../Home/images/bike.png'), title: 'Bikes'},
+  {id: 6, image: require('../Home/images/electronic.png'), title: 'electronic'},
+  {id: 7, image: require('../Home/images/vehicles.png'), title: 'vehicles'},
+  {id: 8, image: require('../Home/images/furniture.png'), title: 'furniture'},
+  {id: 9, image: require('../Home/images/fashion.png'), title: 'fashion'},
+  {id: 10, image: require('../Home/images/hobby.png'), title: 'hobby'},
+  {id: 11, image: require('../Home/images/pets.png'), title: 'pets'},
+  {id: 12, image: require('../Home/images/services.png'), title: 'services'},
+];
+
+let image1 = "require('../Home/images/air.jpeg')";
+
+const ItemData = [
+  {
+    id: 1,
+    Itemimage: require('../Home/images/iwatch.jpg'),
+    ItemPrice: '56,500',
+    ItemName: 'IWatch searies 6',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 2,
+    Itemimage: require('../Home/images/macbook.jpeg'),
+
+    ItemPrice: '1,20,000',
+    ItemName: 'MacBook pro',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 3,
+    Itemimage: require('../Home/images/dell.jpeg'),
+
+    ItemPrice: '1,30,000',
+    ItemName: 'Dell Inspiro',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 4,
+    Itemimage: require('../Home/images/ipad.jpg'),
+    ItemPrice: '1,40,000',
+    ItemName: 'Ipad',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 5,
+    Itemimage: require('../Home/images/asus.jpeg'),
+    ItemPrice: '1,50,000',
+    ItemName: 'Asus Zenbook',
+    ItemLocation: 'Varracha Surat',
+  },
+
+  {
+    id: 6,
+    Itemimage: require('../Home/images/hp.jpeg'),
+    ItemPrice: '1,60,000',
+    ItemName: 'Hp Gaming Laptop',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 7,
+    Itemimage: require('../Home/images/macbook.jpeg'),
+    ItemPrice: '1,70,000',
+    ItemName: 'MacBook pro 22Inch',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 8,
+    Itemimage: require('../Home/images/air.jpeg'),
+    ItemPrice: '1,80,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 9,
+    Itemimage: require('../Home/images/asus.jpeg'),
+    ItemPrice: '1,0,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 10,
+    Itemimage: require('../Home/images/13.jpg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'Iphone 13 Pro Max',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 11,
+    Itemimage: require('../Home/images//macbook.jpeg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 12,
+    Itemimage: require('../Home/images/12.jpg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'Ihpone 12 Pro Max',
+    ItemLocation: 'Varracha Surat',
+  },{
+    id: 13,
+    Itemimage: require('../Home/images/iwatch.jpg'),
+    ItemPrice: '56,500',
+    ItemName: 'IWatch searies 6',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 14,
+    Itemimage: require('../Home/images/macbook.jpeg'),
+
+    ItemPrice: '1,20,000',
+    ItemName: 'MacBook pro',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 15,
+    Itemimage: require('../Home/images/dell.jpeg'),
+
+    ItemPrice: '1,30,000',
+    ItemName: 'Dell Inspiro',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 16,
+    Itemimage: require('../Home/images/ipad.jpg'),
+    ItemPrice: '1,40,000',
+    ItemName: 'Ipad',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 17,
+    Itemimage: require('../Home/images/asus.jpeg'),
+    ItemPrice: '1,50,000',
+    ItemName: 'Asus Zenbook',
+    ItemLocation: 'Varracha Surat',
+  },
+
+  {
+    id: 18,
+    Itemimage: require('../Home/images/hp.jpeg'),
+    ItemPrice: '1,60,000',
+    ItemName: 'Hp Gaming Laptop',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 19,
+    Itemimage: require('../Home/images/macbook.jpeg'),
+    ItemPrice: '1,70,000',
+    ItemName: 'MacBook pro 22Inch',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 20,
+    Itemimage: require('../Home/images/air.jpeg'),
+    ItemPrice: '1,80,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 21,
+    Itemimage: require('../Home/images/asus.jpeg'),
+    ItemPrice: '1,0,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 22,
+    Itemimage: require('../Home/images/13.jpg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'Iphone 13 Pro Max',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 23,
+    Itemimage: require('../Home/images//macbook.jpeg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'MacBook Air',
+    ItemLocation: 'Varracha Surat',
+  },
+  {
+    id: 24,
+    Itemimage: require('../Home/images/12.jpg'),
+    ItemPrice: '1,20,000',
+    ItemName: 'Ihpone 12 Pro Max',
+    ItemLocation: 'Varracha Surat',
+  },
+];
 
 export default function HomeScreen({navigation}) {
 
-  const renderdata = ({item}) => (
-    <View>
-      <Image style={styles.carsLogo} source={item.image}/>
-      <Text>{item.title}</Text>
-    </View>
-  )
+  const [Heart,setHeart] = useState('heart-outlined')
+  // const renderdata = ({item}) => (
+  //   <View>
+  //     <Image style={styles.carsLogo} source={item.image} />
+  //     <Text>{item.title}</Text>
+  //   </View>
+  // );
+
+  const CategoryHandler = () => {
+    return categoryData.map((i, index) => {
+      console.log(i.title);
+      const {image, title} = i;
+      return (
+        <View style={styles.olxAutos}>
+          <TouchableOpacity>
+            <Image style={styles.carsLogo} source={i.image} />
+            <Text style={styles.CategoryTitle}>{i.title}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    });
+  };
+
+  const renderItem = ({item}) => {
+    return (
+      <View style={styles.ItemCard}>
+        <TouchableOpacity>
+          <Image style={styles.ItemImage} source={item.Itemimage} />
+          <Text style={styles.priceText}>₹{item.ItemPrice}</Text>
+
+          <Text style={styles.DetailText}>{item.ItemName}</Text>
+          <View style={styles.locationView}>
+            <MaterialIcons size={16} color="black" name="location-on" />
+            <Text style={styles.locationText}>Varracha, surat</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {
+          if(Heart === 'heart'){
+            setHeart('heart-outlined')
+          }else{
+            setHeart('heart')
+          }
+        }}
+         style={styles.LikeItemBtn}>
+          <Entypo size={20} color="red" name={Heart} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.locationAndSearch}>
           <TouchableOpacity>
             <View style={styles.locationView}>
-              <Image
-                style={styles.Locationlogo}
-                source={require('../Home/images/location.png')}
-              />
+              <MaterialIcons size={20} color="black" name="location-on" />
               <Text style={styles.locationText}>Varracha, surat</Text>
               <Image
                 style={styles.downarrowlogo}
@@ -66,7 +295,7 @@ export default function HomeScreen({navigation}) {
 
         {/* Browse Category */}
 
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Browse Categories</Text>
 
@@ -76,134 +305,11 @@ export default function HomeScreen({navigation}) {
           </View>
 
           <View style={styles.recomandedItem}>
-            <View>
-
-              <FlatList 
-              data={categoryData}
-              renderItem={renderdata}
-              keyExtractor={item => item.id}
-              horizontal={true}
-            showsHorizontalScrollIndicator={false}
-              />
-
-            </View>
-            {/* <ScrollView horizontal={true}> */}
-              {/* <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/cars.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>OLX AUTOS</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/properties.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>properties</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/mobiles.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Mobiles</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/jobs.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Jobs</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/bike.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Bikes</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/electronic.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Electronics</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/vehicles.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Commmercial Vehicles</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/furniture.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>furniture</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/fashion.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Fashion</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/hobby.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>Sports & Hobby</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/pets.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>pets</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.olxAutos}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.carsLogo}
-                    source={require('../Home/images/services.png')}
-                  />
-                  <Text style={styles.CategoryTitle}>services</Text>
-                </TouchableOpacity>
-              </View> */}
-            {/* </ScrollView> */}
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}>
+              {CategoryHandler()}
+            </ScrollView>
           </View>
 
           {/* Category */}
@@ -212,122 +318,16 @@ export default function HomeScreen({navigation}) {
             <Text style={styles.bcText}>Fresh Recommandation</Text>
           </View>
 
-          
-            <View style={styles.recomadationView}>
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.ItemCard}>
-                <TouchableOpacity>
-                <Image
-                  style={styles.ItemImage}
-                  source={require('../Home/images/laptop.jpeg')}
-                />
-                <Text style={styles.priceText}>₹ 1,20,000</Text>
-
-                <Text style={styles.DetailText}>MateBook X Pro</Text>
-                <View style={styles.locationView}>
-                  <Image
-                    style={styles.Locationlogo}
-                    source={require('../Home/images/location.png')}
-                  />
-                  <Text style={styles.locationText}>Varracha, surat</Text>
-                </View>
-                </TouchableOpacity>
-              </View>
-
-            </View>
+          <View style={styles.recomadationView}>
+            <FlatList
+              numColumns={2}
+              contentContainerStyle={{paddingBottom: 210}}
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              data={ItemData}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          </View>
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -343,12 +343,11 @@ const styles = StyleSheet.create({
     // paddingRight: 15,
   },
   locationAndSearch: {
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
     paddingBottom: 20,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderBottomColor: 'black',
-
+    borderBottomColor: 'gray',
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 15,
@@ -359,11 +358,16 @@ const styles = StyleSheet.create({
     width: 20,
   },
   locationText: {
-    marginLeft: 5,
-    color: 'black',
+    textTransform: 'uppercase',
+    marginLeft: 2,
+    marginLeft: 2,
+    color: 'gray',
+    fontSize: 12,
   },
   locationView: {
     // flex: 1,
+    marginLeft: 5,
+    marginTop: 2,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -385,6 +389,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   notiIcon: {
+    marginTop: 10,
     height: 20,
     width: 20,
   },
@@ -407,15 +412,16 @@ const styles = StyleSheet.create({
   },
   bcText: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
   },
   seeallbtn: {
     fontWeight: 'bold',
     color: 'black',
-    textDecorationLine: 'underline',
+    borderBottomWidth: 2,
   },
   recomandedItem: {
+    
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
@@ -426,15 +432,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 20,
     marginRight: 20,
-    width: 90,
+    width: '5%',
     alignItems: 'center',
     textAlign: 'center',
   },
   carsLogo: {
-    height: 60,
-    width: 60,
+    height: 50,
+    width: 50,
   },
   CategoryTitle: {
+    
     fontSize: 10,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -451,24 +458,43 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   ItemCard: {
-    borderRadius: 10,
+    borderRadius: 5,
     margin: 5,
-    padding: 5,
-    width: '46%',
-    // backgroundColor: 'red',
+    padding: 3,
+    width: '47%',
+    backgroundColor: 'white',
     borderWidth: 1,
+    borderColor: 'gray',
+    shadowColor: 'red',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.9,
   },
   ItemImage: {
     padding: 10,
-    height: 180,
+    height: 150,
     width: '100%',
+    borderRadius: 5,
   },
   priceText: {
     marginTop: 10,
+    marginLeft: 5,
     color: 'black',
     fontWeight: 'bold',
   },
   DetailText: {
-    marginTop: 5,
+    textTransform: 'uppercase',
+    fontSize: 12,
+    color: 'black',
+    marginTop: 4,
+    marginBottom: 2,
+    marginLeft: 5,
+  },
+  LikeItemBtn: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    padding: 5,
+    position: 'absolute',
+    top: '8%',
+    right: '8%',
   },
 });
