@@ -217,8 +217,6 @@ export default function HomeScreen({navigation}) {
   // CategoryHandler
   const CategoryHandler = () => {
     return categoryData.map((i, index) => {
-      console.log(i.title);
-      const {image, title} = i;
       return (
         <View style={styles.olxAutos}>
           <TouchableOpacity>
@@ -464,9 +462,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'gray',
-    shadowColor: 'red',
-    shadowOffset: {width: 1, height: 3},
-    shadowOpacity: 0.9,
+    
   },
   ItemImage: {
     padding: 10,
