@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingScreen from './src/component/OLX/Setting/SettingScreen'
 import Icon from 'react-native-ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Chat from './src/component/OLX/Chat/Chat';
 import Detail from './src/component/OLX/Detail/Detail';
@@ -15,6 +17,7 @@ import Account from './src/component/OLX/Account/Account';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import Login from './src/component/OLX/Login/Login';
+import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -28,17 +31,18 @@ function TabHandler() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
+          
 
-          if (route.name === 'Home') {
+          if (route.name === 'Homess') {
             iconName = focused
-              ? 'ios-information-circle'
+              ? 'home'
               : 'ios-information-circle-outline';
           } else if (route.name === 'Settings') {
             iconName = focused ? 'ios-list-box' : 'ios-list';
           }
 
           if (route.name === 'HOME') {
-            return <MaterialIcons size={20} color='black' name='home' />
+            return <MaterialIcons size={20} color='black' name='home'/>
           } else if (route.name === 'CHAT') {
             return <MaterialIcons size={20} color='black' name='chat' />
           } else if (route.name === 'SETTING') {
@@ -48,12 +52,11 @@ function TabHandler() {
           } else if (route.name === 'ACCOUNT') {
             return <MaterialIcons size={20} color='black' name='account-circle' />
           }
-          return <MaterialIcons size={37} color='orange' name='add-circle' />
+          return <AntDesign style={{position: 'absolute',bottom: 5,}} size={50} color='orange' name='pluscircleo' />
         },
         tabBarActiveTintColor: 'red',
         headerShown: false,
         tabBarInactiveTintColor: 'black',
-      
         // tabBarInactiveBackgroundColor: 'red',
       })}
     >
@@ -74,7 +77,6 @@ function AccountStackHandler () {
     </AccountStack.Navigator>
   )
 }
-
 
 function HomeScreenStackHandler () {
   return(

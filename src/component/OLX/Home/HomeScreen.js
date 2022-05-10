@@ -9,214 +9,28 @@ import {
   ScrollView,
   SafeAreaView,
   FlatList,
-  
+  Modal,
 } from 'react-native';
 import  React,{useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-
+import ItemData from '../Data/ItemData';
+import Data from '../Data/Data';
 
 // Category Data
-const categoryData = [
-  {id: 1, image: require('../Home/images/cars.png'), title: 'olx autos'},
-  {id: 2, image: require('../Home/images/properties.png'), title: 'propertry'},
-  {id: 3, image: require('../Home/images/mobiles.png'), title: 'Mobiles'},
-  {id: 4, image: require('../Home/images/jobs.png'), title: 'Jobs'},
-  {id: 5, image: require('../Home/images/bike.png'), title: 'Bikes'},
-  {id: 6, image: require('../Home/images/electronic.png'), title: 'electronic'},
-  {id: 7, image: require('../Home/images/vehicles.png'), title: 'vehicles'},
-  {id: 8, image: require('../Home/images/furniture.png'), title: 'furniture'},
-  {id: 9, image: require('../Home/images/fashion.png'), title: 'fashion'},
-  {id: 10, image: require('../Home/images/hobby.png'), title: 'hobby'},
-  {id: 11, image: require('../Home/images/pets.png'), title: 'pets'},
-  {id: 12, image: require('../Home/images/services.png'), title: 'services'},
-];
+const CateData = Data;
 
 // Item Data
-const ItemData = [
-  {
-    id: 1,
-    Itemimage: require('../Home/images/iwatch.jpg'),
-    ItemPrice: '56,500',
-    ItemName: 'IWatch searies 6',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 2,
-    Itemimage: require('../Home/images/macbook.jpeg'),
-
-    ItemPrice: '1,20,000',
-    ItemName: 'MacBook pro',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 3,
-    Itemimage: require('../Home/images/dell.jpeg'),
-
-    ItemPrice: '1,30,000',
-    ItemName: 'Dell Inspiro',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 4,
-    Itemimage: require('../Home/images/ipad.jpg'),
-    ItemPrice: '1,40,000',
-    ItemName: 'Ipad',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 5,
-    Itemimage: require('../Home/images/asus.jpeg'),
-    ItemPrice: '1,50,000',
-    ItemName: 'Asus Zenbook',
-    ItemLocation: 'Varracha Surat',
-  },
-
-  {
-    id: 6,
-    Itemimage: require('../Home/images/hp.jpeg'),
-    ItemPrice: '1,60,000',
-    ItemName: 'Hp Gaming Laptop',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 7,
-    Itemimage: require('../Home/images/macbook.jpeg'),
-    ItemPrice: '1,70,000',
-    ItemName: 'MacBook pro 22Inch',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 8,
-    Itemimage: require('../Home/images/air.jpeg'),
-    ItemPrice: '1,80,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 9,
-    Itemimage: require('../Home/images/asus.jpeg'),
-    ItemPrice: '1,0,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 10,
-    Itemimage: require('../Home/images/13.jpg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'Iphone 13 Pro Max',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 11,
-    Itemimage: require('../Home/images//macbook.jpeg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 12,
-    Itemimage: require('../Home/images/12.jpg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'Ihpone 12 Pro Max',
-    ItemLocation: 'Varracha Surat',
-  },{
-    id: 13,
-    Itemimage: require('../Home/images/iwatch.jpg'),
-    ItemPrice: '56,500',
-    ItemName: 'IWatch searies 6',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 14,
-    Itemimage: require('../Home/images/macbook.jpeg'),
-
-    ItemPrice: '1,20,000',
-    ItemName: 'MacBook pro',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 15,
-    Itemimage: require('../Home/images/dell.jpeg'),
-
-    ItemPrice: '1,30,000',
-    ItemName: 'Dell Inspiro',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 16,
-    Itemimage: require('../Home/images/ipad.jpg'),
-    ItemPrice: '1,40,000',
-    ItemName: 'Ipad',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 17,
-    Itemimage: require('../Home/images/asus.jpeg'),
-    ItemPrice: '1,50,000',
-    ItemName: 'Asus Zenbook',
-    ItemLocation: 'Varracha Surat',
-  },
-
-  {
-    id: 18,
-    Itemimage: require('../Home/images/hp.jpeg'),
-    ItemPrice: '1,60,000',
-    ItemName: 'Hp Gaming Laptop',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 19,
-    Itemimage: require('../Home/images/macbook.jpeg'),
-    ItemPrice: '1,70,000',
-    ItemName: 'MacBook pro 22Inch',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 20,
-    Itemimage: require('../Home/images/air.jpeg'),
-    ItemPrice: '1,80,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 21,
-    Itemimage: require('../Home/images/asus.jpeg'),
-    ItemPrice: '1,0,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 22,
-    Itemimage: require('../Home/images/13.jpg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'Iphone 13 Pro Max',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 23,
-    Itemimage: require('../Home/images//macbook.jpeg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'MacBook Air',
-    ItemLocation: 'Varracha Surat',
-  },
-  {
-    id: 24,
-    Itemimage: require('../Home/images/12.jpg'),
-    ItemPrice: '1,20,000',
-    ItemName: 'Ihpone 12 Pro Max',
-    ItemLocation: 'Varracha Surat',
-  },
-];
-
+const itemData = ItemData;
 export default function HomeScreen({ navigation }) {
 
   const [Heart,setHeart] = useState('heart-outlined')
+  const [modalVisible, setModalVisible] = useState(false);
 
   // CategoryHandler
   const CategoryHandler = () => {
-    return categoryData.map((i, index) => {
+    return CateData.map((i, index) => {
       return (
         <View style={styles.olxAutos}>
           <TouchableOpacity >
@@ -298,7 +112,9 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Browse Categories</Text>
 
-            <TouchableOpacity >
+            <TouchableOpacity onPress={
+              () => setModalVisible(true)
+            }>
               <Text style={styles.seeallbtn}>See All</Text>
             </TouchableOpacity>
           </View>
@@ -323,16 +139,31 @@ export default function HomeScreen({ navigation }) {
               numColumns={2}
               contentContainerStyle={{paddingBottom: 210}}
               columnWrapperStyle={{justifyContent: 'space-between'}}
-              data={ItemData}
+              data={itemData}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
           </View>
           </ScrollView>
       </View>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+<View style={{height: '70%',width: '90%',backgroundColor: 'red',top: 230,left: 20}}>
+
+</View>
+
+      </Modal>
     </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -4,6 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>EvilIcons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>MaterialIcons.ttf</string>
 	</array>
