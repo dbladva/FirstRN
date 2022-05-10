@@ -210,7 +210,7 @@ const ItemData = [
   },
 ];
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
 
   const [Heart,setHeart] = useState('heart-outlined')
 
@@ -219,7 +219,7 @@ export default function HomeScreen({navigation}) {
     return categoryData.map((i, index) => {
       return (
         <View style={styles.olxAutos}>
-          <TouchableOpacity>
+          <TouchableOpacity >
             <Image style={styles.carsLogo} source={i.image} />
             <Text style={styles.CategoryTitle}>{i.title}</Text>
           </TouchableOpacity>
@@ -232,7 +232,7 @@ export default function HomeScreen({navigation}) {
   const renderItem = ({item}) => {
     return (
       <View style={styles.ItemCard}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('Detail')}}>
           <Image style={styles.ItemImage} source={item.Itemimage} />
           <Text style={styles.priceText}>₹{item.ItemPrice}</Text>
 
@@ -264,6 +264,9 @@ export default function HomeScreen({navigation}) {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.locationAndSearch}>
+          <TouchableOpacity style={styles.drawerIcon} onPress={() => {navigation.openDrawer();}}>
+          <MaterialIcons size={30} color="black" name="menu" />
+          </TouchableOpacity>
           <TouchableOpacity>
             <View style={styles.locationView}>
               <MaterialIcons size={20} color="black" name="location-on" />
@@ -333,7 +336,7 @@ export default function HomeScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: 'gray',
+    backgroundColor: '#ffffff',
     // paddingTop: 20,
     // paddingBottom: 20,
     // paddingLeft: 15,
@@ -459,7 +462,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 3,
     width: '47%',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'gray',
     
@@ -492,4 +495,8 @@ const styles = StyleSheet.create({
     top: '8%',
     right: '8%',
   },
+  drawerIcon:{
+    marginBottom: 10,
+    marginLeft: 10,
+  }
 });
