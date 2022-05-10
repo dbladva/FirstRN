@@ -25,7 +25,7 @@ const Account = ({navigation}) => {
           />
           <View>
             <Text style={styles.Welcome}>Welcome to OLX!</Text>
-            <TouchableOpacity onPress={() => {navigation.navigate('Login')}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('SignIn')}}>
               <Text style={styles.LoginText}>Log in to your account</Text>
             </TouchableOpacity>
           </View>
@@ -86,7 +86,7 @@ const Account = ({navigation}) => {
         </TouchableOpacity>
 
 <View style={{alignItems: 'center',marginTop: 20,}}>
-<TouchableOpacity onPress={() => {navigation.navigate('Login')}} style={styles.RegiBtn}>
+<TouchableOpacity onPress={() => {navigation.navigate('SignIn')}} style={styles.RegiBtn}>
 <Text style={styles.loginbtn}>Login Or Register</Text>
 </TouchableOpacity>
 </View>

@@ -11,7 +11,7 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
-import  React,{useState} from 'react';
+import React, {useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -23,9 +23,8 @@ const CateData = Data;
 
 // Item Data
 const itemData = ItemData;
-export default function HomeScreen({ navigation }) {
-
-  const [Heart,setHeart] = useState('heart-outlined')
+export default function HomeScreen({navigation}) {
+  const [Heart, setHeart] = useState('heart-outlined');
   const [modalVisible, setModalVisible] = useState(false);
 
   // CategoryHandler
@@ -33,7 +32,7 @@ export default function HomeScreen({ navigation }) {
     return CateData.map((i, index) => {
       return (
         <View style={styles.olxAutos}>
-          <TouchableOpacity >
+          <TouchableOpacity>
             <Image style={styles.carsLogo} source={i.image} />
             <Text style={styles.CategoryTitle}>{i.title}</Text>
           </TouchableOpacity>
@@ -46,7 +45,10 @@ export default function HomeScreen({ navigation }) {
   const renderItem = ({item}) => {
     return (
       <View style={styles.ItemCard}>
-        <TouchableOpacity onPress={() => {navigation.navigate('Detail')}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Detail');
+          }}>
           <Image style={styles.ItemImage} source={item.Itemimage} />
           <Text style={styles.priceText}>₹{item.ItemPrice}</Text>
 
@@ -57,29 +59,53 @@ export default function HomeScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={(item) => {
-          // if(item.id === item){
-            if(Heart === 'heart'){
-              setHeart('heart-outlined')
-            }else{
-              setHeart('heart')
+        <TouchableOpacity
+          onPress={item => {
+            // if(item.id === item){
+            if (Heart === 'heart') {
+              setHeart('heart-outlined');
+            } else {
+              setHeart('heart');
             }
-          // }
-          
-        }}
-         style={styles.LikeItemBtn}>
+            // }
+          }}
+          style={styles.LikeItemBtn}>
           <Entypo size={20} color="red" name={Heart} />
         </TouchableOpacity>
       </View>
     );
   };
 
+  const categoryModelHandler = () => {
+    return CateData.map(d => {
+      return (
+        // <View style={styles.cateItem}>
+        <TouchableOpacity style={styles.cateItem}>
+          <Text style={{textTransform: 'capitalize', fontWeight: '400',color: 'black',}}>
+            {d.title}
+          </Text>
+          <SimpleLineIcons
+            style={styles.rightarrow}
+            size={20}
+            color="black"
+            name="arrow-right"
+          />
+        </TouchableOpacity>
+        // </View>
+      );
+    });
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.locationAndSearch}>
-          <TouchableOpacity style={styles.drawerIcon} onPress={() => {navigation.openDrawer();}}>
-          <MaterialIcons size={30} color="black" name="menu" />
+          <TouchableOpacity
+            style={styles.drawerIcon}
+            onPress={() => {
+              navigation.openDrawer();
+            }}>
+            <MaterialIcons size={30} color="black" name="menu" />
           </TouchableOpacity>
           <TouchableOpacity>
             <View style={styles.locationView}>
@@ -112,9 +138,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Browse Categories</Text>
 
-            <TouchableOpacity onPress={
-              () => setModalVisible(true)
-            }>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Text style={styles.seeallbtn}>See All</Text>
             </TouchableOpacity>
           </View>
@@ -132,7 +156,6 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.BrowseCategory}>
             <Text style={styles.bcText}>Fresh Recommandation</Text>
           </View>
-         
 
           <View style={styles.recomadationView}>
             <FlatList
@@ -144,26 +167,31 @@ export default function HomeScreen({ navigation }) {
               keyExtractor={item => item.id}
             />
           </View>
-          </ScrollView>
+        </ScrollView>
       </View>
       <Modal
-        animationType="fade"
+        animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
-        }}
-      >
-<View style={{height: '70%',width: '90%',backgroundColor: 'red',top: 230,left: 20}}>
-
-</View>
-
+        }}>
+        <View style={styles.modelContainer}>
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
+            <MaterialIcons
+              style={styles.rightarrow}
+              size={25}
+              color="black"
+              name="close"
+            />
+          </TouchableOpacity>
+          <View style={styles.ModelView}>{categoryModelHandler()}</View>
+        </View>
       </Modal>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -211,7 +239,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingLeft: 10,
     // backgroundColor: 'white',
-    color: '#000000',
+    color: 'black',
     width: '85%',
     height: 40,
     borderWidth: 1,
@@ -252,7 +280,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   recomandedItem: {
-    
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
@@ -272,7 +299,6 @@ const styles = StyleSheet.create({
     width: 50,
   },
   CategoryTitle: {
-    
     fontSize: 10,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -296,7 +322,6 @@ const styles = StyleSheet.create({
     // backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'gray',
-    
   },
   ItemImage: {
     padding: 10,
@@ -326,8 +351,29 @@ const styles = StyleSheet.create({
     top: '8%',
     right: '8%',
   },
-  drawerIcon:{
+  drawerIcon: {
     marginBottom: 10,
     marginLeft: 10,
-  }
+  },
+  modelContainer: {
+    // height: '65%',
+    width: '90%',
+    backgroundColor: '#bbdefb',
+    borderRadius: 10,
+    top: 200,
+    left: 20,
+  },
+  ModelView: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    margin: 10,
+  },
+  cateItem: {
+    margin: 5,
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });

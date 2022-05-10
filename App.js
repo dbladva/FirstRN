@@ -16,8 +16,9 @@ import Sell from './src/component/OLX/Sell/Sell';
 import Account from './src/component/OLX/Account/Account';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import Login from './src/component/OLX/Login/Login';
+import SignIn from './src/component/OLX/Login/SignIn';
 import 'react-native-gesture-handler';
+import Signup from './src/component/OLX/Login/Signup';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -52,7 +53,7 @@ function TabHandler() {
           } else if (route.name === 'ACCOUNT') {
             return <MaterialIcons size={20} color='black' name='account-circle' />
           }
-          return <AntDesign style={{position: 'absolute',bottom: 5,}} size={50} color='orange' name='pluscircleo' />
+          return <AntDesign style={{position: 'absolute',bottom: 5,}} size={50} color='orange' name='pluscircle' />
         },
         tabBarActiveTintColor: 'red',
         headerShown: false,
@@ -64,16 +65,17 @@ function TabHandler() {
       <Tab.Screen name='CHAT' component={Chat} />
       <Tab.Screen name="SELL" component={Sell} />
       <Tab.Screen name="SETTING" component={SettingScreen} />
-      <Tab.Screen name="ACCOUNT" component={AccountStackHandler} />
+      <Tab.Screen name="ACCOUNT"  screenOptions={{headerShown: false}}  component={AccountStackHandler} />
     </Tab.Navigator>
   )
 }
 
 function AccountStackHandler () {
   return(
-    <AccountStack.Navigator >
-      <AccountStack.Screen name='Account' options={{headerShown: true}} component={Account} />
-      <AccountStack.Screen name='Login' options={{headerShown: true}} component={Login} />
+    <AccountStack.Navigator screenOptions={{headerShown: false}} >
+      <AccountStack.Screen name='Account' screenOptions={{headerShown: false}}  component={Account} />
+      <AccountStack.Screen name='SignIn' screenOptions={{headerShown: false}}   component={SignIn} />
+      <AccountStack.Screen name='Signup' screenOptions={{headerShown: false}}   component={Signup} />
     </AccountStack.Navigator>
   )
 }
@@ -82,7 +84,7 @@ function HomeScreenStackHandler () {
   return(
     <HomeStack.Navigator >
       <HomeStack.Screen name='Homess' options={{headerShown: false}} component={HomeScreen} />
-      <HomeStack.Screen name='Detail' screenOptions={{headerShown: true}} component={Detail} />
+      <HomeStack.Screen name='Detail' screenOptions={{headerShown: false}} component={Detail} />
       <HomeStack.Screen name='Chat' screenOptions={{headerShown: true}} component={Chat} />
     </HomeStack.Navigator>
   )
