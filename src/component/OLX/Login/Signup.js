@@ -24,7 +24,9 @@ import {
         <View style={[{margin: 20}, styles.container]}>
           <View style={styles.SignInScreen}>
             <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-              <Text style={styles.SignInText}>Sign In</Text>
+              <Text style={{margin: 10,
+      fontWeight: 'bold',
+      }}>Sign In</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text style={styles.SignInText}>Sign Up</Text>
@@ -78,7 +80,7 @@ import {
     SignInText: {
       margin: 10,
       fontWeight: 'bold',
-      borderBottomWidth: 2,
+      borderBottomWidth: 3,
     },
     WelcomeTExt: {
       marginLeft: 20,

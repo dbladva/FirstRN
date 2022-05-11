@@ -19,6 +19,8 @@ import 'react-native-gesture-handler';
 import SignIn from './src/component/OLX/Login/SignIn';
 import 'react-native-gesture-handler';
 import Signup from './src/component/OLX/Login/Signup';
+import Notification from './src/component/OLX/Notification/Notification';
+import Wishlist from './src/component/OLX/Wish List/Wishlist';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -42,14 +44,12 @@ function TabHandler() {
             iconName = focused ? 'ios-list-box' : 'ios-list';
           }
 
-          if (route.name === 'HOME') {
+          if (route.name === 'HOME' ) {
             return <MaterialIcons size={20} color='black' name='home'/>
           } else if (route.name === 'CHAT') {
             return <MaterialIcons size={20} color='black' name='chat' />
           } else if (route.name === 'SETTING') {
             return <MaterialIcons size={20} color='black' name='settings' />
-          } else if (route.name === 'ACCOUNT') {
-            return <MaterialIcons size={20} color='black' name='account-circle' />
           } else if (route.name === 'ACCOUNT') {
             return <MaterialIcons size={20} color='black' name='account-circle' />
           }
@@ -100,8 +100,59 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator  screenOptions={{headerShown: false}} initialRouteName="Home">
-        <Drawer.Screen    name="Home" component={HomescreenTab} />
-        <Drawer.Screen  name="Chat Screen" component={Chat} />
+        <Drawer.Screen    name="Home"  component={HomescreenTab}  options={{
+           title: 'Home',
+           drawerIcon: ({focused, size}) => (
+              <MaterialIcons
+                 name="home"
+                 size={size}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+        }} />
+        <Drawer.Screen  name="Chat Screen" screenOptions={{headerShown: true}} component={Chat} options={{
+           title: 'Chat',
+           drawerIcon: ({focused, size}) => (
+              <MaterialIcons
+                 name="chat"
+                 size={size}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+        }} />
+
+<Drawer.Screen  name="Notification" component={Notification} options={{
+           title: 'Notification',
+           drawerIcon: ({focused, size}) => (
+              <MaterialIcons
+                 name="notifications-none"
+                 size={size}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+          }} />
+          <Drawer.Screen  name="Wishlist" component={Wishlist} options={{
+                     title: 'Wish List',
+                     drawerIcon: ({focused, size}) => (
+                        <AntDesign
+                           name="heart"
+                           size={size}
+                           color={focused ? '#7cc' : '#ccc'}
+                        />
+                     ),
+                  }} />
+
+<Drawer.Screen  name="Setting" component={SettingScreen} options={{
+           title: 'Setting',
+           drawerIcon: ({focused, size}) => (
+              <MaterialIcons
+                 name="settings"
+                 size={size}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+        }} />
+
       </Drawer.Navigator>
     </NavigationContainer>
   )

@@ -356,12 +356,12 @@ const styles = StyleSheet.create({
   drawerIcon: {
     marginBottom: 10,
     marginLeft: 10,
+    width: 30,
   },
   modelContainer: {
     // height: '65%',
     flex: 1,
     backgroundColor: '#bbdefb',
-    borderRadius: 10,
     // top: 200,
     // left: 20,
   },

@@ -4,16 +4,18 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{ marginLeft: 20, marginTop: 10, }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Account')}
+          style={{marginLeft: 20, marginTop: 10}}>
           <MaterialIcons
             style={styles.rightarrow}
             size={30}
@@ -21,13 +23,13 @@ const SignIn = ({ navigation }) => {
             name="arrow-back"
           />
         </TouchableOpacity>
-        <View style={[{ margin: 20 }, styles.container]}>
+        <View style={[{margin: 20}, styles.container]}>
           <View style={styles.SignInScreen}>
             <TouchableOpacity>
               <Text style={styles.SignInText}>Sign In</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-              <Text style={styles.SignInText}>Sign Up</Text>
+              <Text style={{margin: 10, fontWeight: 'bold'}}>Sign Up</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.WelcomeTExt}>
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
   SignInText: {
     margin: 10,
     fontWeight: 'bold',
-    borderBottomWidth: 2,
+    borderBottomWidth: 3,
   },
   WelcomeTExt: {
     marginLeft: 20,
@@ -127,6 +129,6 @@ const styles = StyleSheet.create({
   },
   forgotPass: {
     color: 'gray',
-    fontWeight: '500'
+    fontWeight: '500',
   },
 });

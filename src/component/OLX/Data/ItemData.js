@@ -24,7 +24,7 @@ export default ItemData = [
     {
       id: 4,
       Itemimage: require('../Home/images/ipad.jpg'),
-      ItemPrice: '1,40,000',
+      ItemPrice: '50,000',
       ItemName: 'Ipad',
       ItemLocation: 'Varracha Surat',
     },

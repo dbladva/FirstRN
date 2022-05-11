@@ -1,101 +1,106 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/component/OLX/Home/HomeScreen'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingScreen from './src/component/OLX/Setting/SettingScreen'
-import Icon from 'react-native-ionicons'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import Entypo from 'react-native-vector-icons/Entypo'
-import Chat from './src/component/OLX/Chat/Chat';
-import Detail from './src/component/OLX/Detail/Detail';
-import Sell from './src/component/OLX/Sell/Sell';
-import Account from './src/component/OLX/Account/Account';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import 'react-native-gesture-handler';
-import Login from './src/component/OLX/Login/Login';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Modal,
+  TouchableOpacity,
+  Button,
+  Image,
+} from 'react-native';
+import React, {useState} from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Data from '../Data/Data';
 
-const Stack = createNativeStackNavigator();
-const HomeStack = createNativeStackNavigator();
-const AccountStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+const Sell = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const CateData = Data;
 
-function TabHandler() {
+  const categoryModelHandler = () => {
+    return CateData.map(d => {
+      return (
+        // <View style={styles.cateItem}>
+        <TouchableOpacity style={styles.cateItem}>
+          <View style={styles.CateImage}>
+            <Image style={{height: 40, width: 40}} source={d.image} />
+          <Text style={styles.cateText}>{d.title}</Text>
+          </View>
+          <SimpleLineIcons
+            style={styles.rightarrow}
+            size={20}
+            color="black"
+            name="arrow-right"
+          />
+        </TouchableOpacity>
+        // </View>
+      );
+    });
+  };
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <SafeAreaView style={styles.modelContainer}>
+          <View style={styles.modelContainer}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <MaterialIcons
+                style={styles.rightarrow}
+                size={25}
+                color="black"
+                name="close"
+              />
+            </TouchableOpacity>
+            <View style={styles.ModelView}>{categoryModelHandler()}</View>
+          </View>
+        </SafeAreaView>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-          if (route.name === 'Home') {
-            iconName = focused
-              ? 'ios-information-circle'
-              : 'ios-information-circle-outline';
-          } else if (route.name === 'Settings') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          }
+export default Sell;
 
-          if (route.name === 'HOME') {
-            return <MaterialIcons size={20} color='black' name='home' />
-          } else if (route.name === 'CHAT') {
-            return <MaterialIcons size={20} color='black' name='chat' />
-          } else if (route.name === 'SETTING') {
-            return <MaterialIcons size={20} color='black' name='settings' />
-          } else if (route.name === 'ACCOUNT') {
-            return <MaterialIcons size={20} color='black' name='account-circle' />
-          } else if (route.name === 'ACCOUNT') {
-            return <MaterialIcons size={20} color='black' name='account-circle' />
-          }
-          return <MaterialIcons size={37} color='orange' name='add-circle' />
-        },
-        tabBarActiveTintColor: 'red',
-        headerShown: false,
-        tabBarInactiveTintColor: 'black',
-      
-        // tabBarInactiveBackgroundColor: 'red',
-      })}
-    >
-      <Tab.Screen name="HOME" options={{headerShown: false}}  component={HomeScreenStackHandler} />
-      <Tab.Screen name='CHAT' component={Chat} />
-      <Tab.Screen name="SELL" component={Sell} />
-      <Tab.Screen name="SETTING" component={SettingScreen} />
-      <Tab.Screen name="ACCOUNT" component={AccountStackHandler} />
-    </Tab.Navigator>
-  )
-}
-
-function AccountStackHandler () {
-    <AccountStack.Navigator >
-      <AccountStack.Screen name='Ho'  component={HomeScreen} />
-      <AccountStack.Screen name='Homes'  component={Login} />
-
-    </AccountStack.Navigator>
-
-function HomeScreenStackHandler () {
-  return(
-    <HomeStack.Navigator >
-      <HomeStack.Screen name='Homess' options={{headerShown: false}} component={HomeScreen} />
-      <HomeStack.Screen name='Detail' screenOptions={{headerShown: true}} component={Detail} />
-      <HomeStack.Screen name='Chat' screenOptions={{headerShown: true}} component={Chat} />
-    </HomeStack.Navigator>
-  )
-}
-
-function HomescreenTab () {
-  return (
-    TabHandler()
-    )
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator  screenOptions={{headerShown: false}} initialRouteName="Home">
-        <Drawer.Screen    name="Home" component={HomescreenTab} />
-        <Drawer.Screen  name="Chat Screen" component={Chat} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  )
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  modelContainer: {
+    flex: 1,
+  },
+  modelContainer: {
+    // height: '65%',
+    flex: 1,
+    backgroundColor: '#bbdefb',
+    borderRadius: 10,
+    // top: 200,
+    // left: 20,
+  },
+  ModelView: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    margin: 10,
+  },
+  cateItem: {
+    margin: 5,
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  rightarrow: {
+    margin: 8,
+  },
+  cateText: {
+    textTransform: 'capitalize',
+    fontWeight: '400',
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'black',
+    marginLeft: 10,
+  },
+  CateImage: {
+    flexDirection: 'row',
+  },
+});

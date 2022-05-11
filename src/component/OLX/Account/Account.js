@@ -81,7 +81,6 @@ const Account = ({navigation}) => {
               name="arrow-right"
             />
             </View>
-            
           </View>
         </TouchableOpacity>
 
@@ -140,33 +139,33 @@ const styles = StyleSheet.create({
     height: 10,
     width: 20,
   },
-  langLogo: {
-    textAlign: 'center',
-    alignItems: 'center',
-    // margin: 10,
-    // height: 20,
-    // width: 20,
-  },
-  HelpSupport: {
-    color: 'black',
-    fontWeight: '500',
-    fontSize: 14,
-  },
-  subtitleHelp: {
-    fontSize: 12,
-    color: 'black'
-  },
-  rightarrow: {},
-  RegiBtn:{
-    alignItems: 'center',
-    justifyContent: 'center',
-backgroundColor: 'black',
-width: '90%',
-padding: 10,
-borderRadius: 10,
-  },
-  loginbtn:{
-    color: 'white',
-    textAlign: 'center',
-  }
+    langLogo: {
+      textAlign: 'center',
+      alignItems: 'center',
+      // margin: 10,
+      // height: 20,
+      // width: 20,
+    },
+    HelpSupport: {
+      color: 'black',
+      fontWeight: '500',
+      fontSize: 14,
+    },
+    subtitleHelp: {
+      fontSize: 12,
+      color: 'black'
+    },
+    rightarrow: {},
+    RegiBtn:{
+      alignItems: 'center',
+      justifyContent: 'center',
+  backgroundColor: 'black',
+  width: '90%',
+  padding: 10,
+  borderRadius: 10,
+    },
+    loginbtn:{
+      color: 'white',
+      textAlign: 'center',
+    }
 });
