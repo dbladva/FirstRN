@@ -4,57 +4,60 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  SafeAreaView
 } from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SignIn = ({navigation}) => {
+const SignIn = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{marginLeft: 20,marginTop: 10,}}>
-       <MaterialIcons
-                  style={styles.rightarrow}
-                  size={30}
-                  color="black"
-                  name="arrow-back"
-                  />
-                  </TouchableOpacity>
-      <View style={[{margin: 20}, styles.container]}>
-        <View style={styles.SignInScreen}>
-          <TouchableOpacity>
-            <Text style={styles.SignInText}>Sign In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={styles.SignInText}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.WelcomeTExt}>
-          <Text style={styles.Welcome}>Welcome</Text>
-          <Text style={styles.Welcome}>Back</Text>
-        </View>
-
-        <View style={styles.SignInTextinput}>
-          <TextInput style={styles.Searchinput} placeholder="Email" />
-          <TextInput style={styles.Searchinput} placeholder="Password" />
-          <View style={styles.Arrow}>
-            <Text style={styles.Singin}>Sign In</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{ marginLeft: 20, marginTop: 10, }}>
+          <MaterialIcons
+            style={styles.rightarrow}
+            size={30}
+            color="black"
+            name="arrow-back"
+          />
+        </TouchableOpacity>
+        <View style={[{ margin: 20 }, styles.container]}>
+          <View style={styles.SignInScreen}>
             <TouchableOpacity>
-              <View style={styles.signinArrow}>
-                <MaterialIcons
-                  style={styles.rightarrow}
-                  size={25}
-                  color="white"
-                  name="arrow-forward"
-                />
-              </View>
+              <Text style={styles.SignInText}>Sign In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+              <Text style={styles.SignInText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-          <Text style={styles.forgotPass}>Forgot Password?</Text>
-          </TouchableOpacity>
+          <View style={styles.WelcomeTExt}>
+            <Text style={styles.Welcome}>Welcome</Text>
+            <Text style={styles.Welcome}>Back</Text>
+          </View>
+
+          <View style={styles.SignInTextinput}>
+            <TextInput style={styles.Searchinput} placeholder="Email" />
+            <TextInput style={styles.Searchinput} placeholder="Password" />
+            <View style={styles.Arrow}>
+              <Text style={styles.Singin}>Sign In</Text>
+              <TouchableOpacity>
+                <View style={styles.signinArrow}>
+                  <MaterialIcons
+                    style={styles.rightarrow}
+                    size={25}
+                    color="white"
+                    name="arrow-forward"
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity>
+              <Text style={styles.forgotPass}>Forgot Password?</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   Singin: {
-    color: 'pink',
+    color: '#FFC0CB',
     fontSize: 30,
     fontWeight: 'bold',
   },
@@ -122,8 +125,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  forgotPass:{
-color: 'gray',
-fontWeight: '500'
+  forgotPass: {
+    color: 'gray',
+    fontWeight: '500'
   },
 });

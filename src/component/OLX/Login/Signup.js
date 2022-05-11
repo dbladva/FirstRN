@@ -4,12 +4,14 @@ import {
     View,
     TouchableOpacity,
     TextInput,
+    SafeAreaView
   } from 'react-native';
   import React from 'react';
   import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
   
   const Signup = ({navigation}) => {
     return (
+<SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{marginLeft: 20,marginTop: 10,}}>
          <MaterialIcons
@@ -56,6 +58,7 @@ import {
           </View>
         </View>
       </View>
+      </SafeAreaView>
     );
   };
   

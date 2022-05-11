@@ -81,7 +81,7 @@ export default function HomeScreen({navigation}) {
       return (
         // <View style={styles.cateItem}>
         <TouchableOpacity style={styles.cateItem}>
-          <Text style={{textTransform: 'capitalize', fontWeight: '400',color: 'black',}}>
+          <Text style={{textTransform: 'capitalize', fontWeight: '400',fontSize: 20,alignSelf: 'center',color: 'black',}}>
             {d.title}
           </Text>
           <SimpleLineIcons
@@ -177,6 +177,7 @@ export default function HomeScreen({navigation}) {
           Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
+          <SafeAreaView style={styles.modelContainer}>
         <View style={styles.modelContainer}>
           <TouchableOpacity onPress={() => setModalVisible(false)}>
             <MaterialIcons
@@ -188,6 +189,7 @@ export default function HomeScreen({navigation}) {
           </TouchableOpacity>
           <View style={styles.ModelView}>{categoryModelHandler()}</View>
         </View>
+        </SafeAreaView>
       </Modal>
     </SafeAreaView>
   );
@@ -357,11 +359,11 @@ const styles = StyleSheet.create({
   },
   modelContainer: {
     // height: '65%',
-    width: '90%',
+    flex: 1,
     backgroundColor: '#bbdefb',
     borderRadius: 10,
-    top: 200,
-    left: 20,
+    // top: 200,
+    // left: 20,
   },
   ModelView: {
     // justifyContent: 'center',
@@ -375,5 +377,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  rightarrow:{
+    margin: 8,
   },
 });
