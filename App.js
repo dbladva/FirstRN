@@ -21,6 +21,8 @@ import 'react-native-gesture-handler';
 import Signup from './src/component/OLX/Login/Signup';
 import Notification from './src/component/OLX/Notification/Notification';
 import Wishlist from './src/component/OLX/Wish List/Wishlist';
+import { store } from './src/redux/store';
+import {Provider} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -30,6 +32,7 @@ const Drawer = createDrawerNavigator();
 
 function TabHandler() {
   return (
+   
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -98,6 +101,7 @@ function HomescreenTab () {
 
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Drawer.Navigator  screenOptions={{headerShown: false}} initialRouteName="Home">
         <Drawer.Screen    name="Home"  component={HomescreenTab}  options={{
@@ -155,5 +159,6 @@ export default function App() {
 
       </Drawer.Navigator>
     </NavigationContainer>
+  </Provider>
   )
 }

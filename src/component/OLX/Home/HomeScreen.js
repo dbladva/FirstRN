@@ -11,12 +11,14 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ItemData from '../Data/ItemData';
 import Data from '../Data/Data';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../../redux/action/product.action';
 
 // Category Data
 const CateData = Data;
@@ -43,6 +45,7 @@ export default function HomeScreen({navigation}) {
 
   // ItemHandler
   const renderItem = ({item}) => {
+    console.log("Helllllooooooooooooooooooooooooooooooooooo");
     return (
       <View style={styles.ItemCard}>
         <TouchableOpacity
@@ -96,6 +99,16 @@ export default function HomeScreen({navigation}) {
     });
   };
 
+  const dispatch = useDispatch();
+
+  const Product = useSelector(state => state.ProductData);
+
+  useEffect(() => {
+    dispatch(fetchProduct());
+  }, []);
+
+
+console.log(Product);
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -167,6 +180,17 @@ export default function HomeScreen({navigation}) {
               keyExtractor={item => item.id}
             />
           </View>
+
+{/* <View style={styles.recomadationView}>
+            <FlatList
+              numColumns={2}
+              contentContainerStyle={{paddingBottom: 210}}
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              data={Product.Product}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          </View> */}
         </ScrollView>
       </View>
       <Modal
@@ -307,6 +331,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   recomadationView: {
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
