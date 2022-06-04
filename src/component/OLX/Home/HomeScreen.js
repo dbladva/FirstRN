@@ -29,6 +29,13 @@ export default function HomeScreen({navigation}) {
   const [Heart, setHeart] = useState('heart-outlined');
   const [modalVisible, setModalVisible] = useState(false);
 
+  const dispatch = useDispatch();
+  const Product = useSelector(state => state.ProductData);
+
+  useEffect(() => {
+    dispatch(fetchProduct());
+  }, []);
+
   // CategoryHandler
   const CategoryHandler = () => {
     return CateData.map((i, index) => {
@@ -44,18 +51,17 @@ export default function HomeScreen({navigation}) {
   };
 
   // ItemHandler
-  const renderItem = ({item}) => {
-    console.log("Helllllooooooooooooooooooooooooooooooooooo");
+  const renderItem = (item) => {
+
     return (
       <View style={styles.ItemCard}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Detail');
           }}>
-          <Image style={styles.ItemImage} source={item.Itemimage} />
-          <Text style={styles.priceText}>₹{item.ItemPrice}</Text>
-
-          <Text style={styles.DetailText}>{item.ItemName}</Text>
+          <Image style={styles.ItemImage} source={require('./images/macbook.jpeg')} />
+          <Text style={styles.priceText}>₹{item.Price}</Text>
+          <Text style={styles.DetailText}>{item.name}</Text>
           <View style={styles.locationView}>
             <MaterialIcons size={16} color="black" name="location-on" />
             <Text style={styles.locationText}>Varracha, surat</Text>
@@ -99,16 +105,7 @@ export default function HomeScreen({navigation}) {
     });
   };
 
-  const dispatch = useDispatch();
 
-  const Product = useSelector(state => state.ProductData);
-
-  useEffect(() => {
-    dispatch(fetchProduct());
-  }, []);
-
-
-console.log(Product);
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -171,14 +168,18 @@ console.log(Product);
           </View>
 
           <View style={styles.recomadationView}>
-            <FlatList
+            {/* <FlatList
               numColumns={2}
               contentContainerStyle={{paddingBottom: 210}}
               columnWrapperStyle={{justifyContent: 'space-between'}}
-              data={itemData}
+              data={Product}
               renderItem={renderItem}
               keyExtractor={item => item.id}
-            />
+            /> */}
+
+            {
+              Product.product.map((item) => renderItem(item))
+            }
           </View>
 
 {/* <View style={styles.recomadationView}>
