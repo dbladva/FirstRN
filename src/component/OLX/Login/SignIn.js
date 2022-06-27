@@ -6,10 +6,27 @@ import {
   TextInput,
   SafeAreaView,
 } from 'react-native';
-import React from 'react';
+import React,{useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
 
 const SignIn = ({navigation}) => {
+
+  useEffect(() => {
+      GoogleSignin.configure({
+        webClientId:'731374113487-ekhk65kl458ue4tf5gnjjp035vmr6egh.apps.googleusercontent.com',
+      });
+    }, []);
+  
+    GoogleHandler = async () => {
+      const { idToken } = await GoogleSignin.signIn();
+console.log(idToken);
+      // const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  
+      // return auth().signInWithCredential(googleCredential);
+    };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -55,6 +72,9 @@ const SignIn = ({navigation}) => {
             </View>
             <TouchableOpacity>
               <Text style={styles.forgotPass}>Forgot Password?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={GoogleHandler}>
+              <Text style={styles.forgotPass}>Sign in with Google</Text>
             </TouchableOpacity>
           </View>
         </View>
